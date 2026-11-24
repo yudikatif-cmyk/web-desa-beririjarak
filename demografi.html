@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demografi & Luas Wilayah - Desa Beririjarak</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Montserrat, Playfair Display & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-wi { font-family: 'Montserrat', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#faf9f6] text-stone-800 antialiased selection:bg-[#047857] selection:text-white flex flex-col min-h-screen">
+
+    <!-- NAVBAR HIJAU TUA PEKAT (#022c22) + AKSEN GOLD (#e2c275 / #d4af37) -->
+    <nav id="navbar" class="sticky top-0 w-full z-50 bg-[#022c22]/95 backdrop-blur-md border-b border-[#d4af37]/40 shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
+            
+            <!-- POJOK KIRI ATAS: LOGO POTENSI DESA BERIRIJARAK -->
+            <a href="index.html" class="flex items-center gap-3 group shrink-0">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#d4af37] via-[#e2c275] to-[#047857] p-[2px] shadow-sm group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-[#022c22] rounded-[14px] flex items-center justify-center">
+                        <i class="fa-solid fa-feather-pointed text-lg text-[#e2c275]"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col font-wi">
+                    <span class="text-[9px] font-bold tracking-[0.22em] text-[#e2c275] uppercase leading-none">
+                        Kecamatan Wanasaba
+                    </span>
+                    <span class="text-base sm:text-lg font-extrabold tracking-tight text-white uppercase leading-tight mt-0.5">
+                        Potensi Desa
+                    </span>
+                    <span class="text-xs sm:text-sm font-extrabold tracking-widest text-[#d4af37] uppercase leading-none">
+                        Beririjarak
+                    </span>
+                </div>
+            </a>
+
+            <!-- MENU NAVIGASI TENGAH -->
+            <div class="hidden md:flex items-center space-x-8 text-[13px] font-semibold text-stone-300">
+                <a href="index.html" class="hover:text-[#e2c275] transition-colors">Beranda</a>
+                <a href="index.html#potensi" class="hover:text-[#e2c275] transition-colors">Eksplorasi</a>
+                <a href="demografi.html" class="text-[#e2c275] font-bold">Demografi</a>
+                <a href="fasilitas.html" class="hover:text-[#e2c275] transition-colors">Fasilitas</a>
+            </div>
+
+            <!-- TOMBOL KANAN -->
+            <div class="flex items-center gap-3">
+                <a href="peta.html" class="bg-[#064e3b] hover:bg-[#047857] text-white border border-[#d4af37]/60 font-semibold px-5 py-2.5 rounded-full transition-colors duration-300 flex items-center gap-2 text-xs shadow-sm">
+                    <i class="fa-solid fa-map-location-dot text-[#e2c275]"></i>
+                    <span>Buka Peta Interaktif</span>
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- HEADER HALAMAN DEMOGRAFI -->
+    <header class="relative bg-[#022c22] text-white py-16 px-6 border-b border-[#d4af37]/40 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.14),transparent_60%)] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#064e3b]/80 border border-[#d4af37]/40 text-[#e2c275] text-[11px] font-bold tracking-[0.22em] uppercase mb-4">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Profil Wilayah & Kependudukan</span>
+            </div>
+            <h1 class="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight">
+                Demografi &amp; Luas Wilayah Per Dusun
+            </h1>
+            <div class="w-16 h-[2px] bg-[#d4af37] mx-auto my-4"></div>
+            <p class="max-w-2xl mx-auto text-xs sm:text-sm text-stone-300 leading-relaxed">
+                Gambaran administratif pembagian 9 wilayah dusun, proporsi luas lahan, serta persebaran penduduk di Desa Beririjarak, Kecamatan Wanasaba, Kabupaten Lombok Timur.
+            </p>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-6 py-12 space-y-12">
+
+        <!-- RINGKASAN STATISTIK UTAMA (4 KARTU) -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Total Luas Wilayah -->
+            <div class="bg-white rounded-2xl p-6 border border-stone-200/90 border-t-4 border-t-[#022c22] shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-stone-400">Total Luas Desa</span>
+                    <div class="w-9 h-9 rounded-xl bg-[#022c22] text-[#e2c275] flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-ruler-combined"></i>
+                    </div>
+                </div>
+                <div id="statTotalHa" class="font-wi text-2xl font-extrabold text-[#022c22]">0 Ha</div>
+                <p id="statTotalKm" class="text-xs text-stone-500 mt-1">Setara 0 km²</p>
+            </div>
+
+            <!-- Jumlah Dusun -->
+            <div class="bg-white rounded-2xl p-6 border border-stone-200/90 border-t-4 border-t-[#d4af37] shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-stone-400">Wilayah Administratif</span>
+                    <div class="w-9 h-9 rounded-xl bg-[#022c22] text-[#e2c275] flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-map-signs"></i>
+                    </div>
+                </div>
+                <div id="statJumlahDusun" class="font-wi text-2xl font-extrabold text-[#022c22]">9 Dusun</div>
+                <p class="text-xs text-stone-500 mt-1">Tersebar dari Utara ke Selatan</p>
+            </div>
+
+            <!-- Total Penduduk -->
+            <div class="bg-white rounded-2xl p-6 border border-stone-200/90 border-t-4 border-t-[#047857] shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-stone-400">Total Penduduk</span>
+                    <div class="w-9 h-9 rounded-xl bg-[#022c22] text-[#e2c275] flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                </div>
+                <div id="statTotalPenduduk" class="font-wi text-2xl font-extrabold text-[#022c22]">0 Jiwa</div>
+                <p id="statTotalKK" class="text-xs text-stone-500 mt-1">0 Kepala Keluarga (KK)</p>
+            </div>
+
+            <!-- Kepadatan Rata-rata -->
+            <div class="bg-white rounded-2xl p-6 border border-stone-200/90 border-t-4 border-t-[#d4af37] shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-stone-400">Kepadatan Wilayah</span>
+                    <div class="w-9 h-9 rounded-xl bg-[#022c22] text-[#e2c275] flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-chart-area"></i>
+                    </div>
+                </div>
+                <div id="statKepadatan" class="font-wi text-2xl font-extrabold text-[#022c22]">0 Jiwa/km²</div>
+                <p id="statDusunTerluas" class="text-xs text-stone-500 mt-1">Terluas: -</p>
+            </div>
+        </section>
+
+        <!-- KETERANGAN DATA SIMULASI -->
+        <div class="bg-amber-50/90 border border-[#d4af37]/60 rounded-2xl px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-stone-700">
+            <div class="flex items-start sm:items-center gap-2.5">
+                <i class="fa-solid fa-circle-info text-[#b45309] text-sm mt-0.5 sm:mt-0"></i>
+                <span>
+                    <strong>Catatan Data:</strong> Angka luas wilayah dan jumlah penduduk pada tabel berikut masih menggunakan <strong>data simulasi</strong>. Anda dapat memperbaruinya langsung melalui array <code class="px-1.5 py-0.5 bg-white rounded border border-amber-200 font-mono text-[11px]">dataDusun</code> di bagian bawah file ini sesuai Monografi Desa Beririjarak.
+                </span>
+            </div>
+        </div>
+
+        <!-- TABEL RINCIAN LUAS WILAYAH PER DUSUN -->
+        <section class="bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden">
+            <div class="p-6 sm:p-8 border-b border-stone-200 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#022c22] text-white">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.22em] text-[#e2c275]">Data Spasial &amp; Administratif</span>
+                    <h2 class="font-serif text-2xl font-bold text-white mt-1">Rincian Luas Wilayah Per Dusun</h2>
+                </div>
+                <div class="flex flex-wrap items-center gap-2.5">
+                    <button type="button" id="btnSortDefault" class="px-3.5 py-2 rounded-full text-xs font-semibold bg-[#064e3b] text-[#e2c275] border border-[#d4af37]/50 hover:bg-[#047857] transition-colors">
+                        Urutan Wilayah
+                    </button>
+                    <button type="button" id="btnSortLuas" class="px-3.5 py-2 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors">
+                        <i class="fa-solid fa-arrow-down-wide-short mr-1 text-[#e2c275]"></i> Terluas
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-stone-100/90 border-b border-stone-200 text-[11px] font-wi font-bold uppercase tracking-wider text-stone-600">
+                            <th class="py-4 px-6 w-14 text-center">No</th>
+                            <th class="py-4 px-6">Nama Dusun</th>
+                            <th class="py-4 px-6 text-right">Luas (Hektar)</th>
+                            <th class="py-4 px-6 text-right">Luas (km²)</th>
+                            <th class="py-4 px-6 w-56">Proporsi Wilayah</th>
+                            <th class="py-4 px-6 text-right">Penduduk</th>
+                            <th class="py-4 px-6 text-center">Peta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelDusunBody" class="divide-y divide-stone-200/80 text-sm">
+                        <!-- Diisi otomatis oleh JavaScript -->
+                    </tbody>
+                    <tfoot id="tabelDusunFoot" class="bg-[#022c22] text-white font-semibold text-sm border-t-2 border-[#d4af37]">
+                        <!-- Total dihitung otomatis oleh JavaScript -->
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- VISUALISASI GRAFIK PERBANDINGAN LUAS DUSUN -->
+        <section class="bg-white rounded-2xl border border-stone-200/90 p-6 sm:p-8 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-2">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.22em] text-[#047857]">Visualisasi Perbandingan</span>
+                    <h2 class="font-serif text-2xl font-bold text-[#022c22] mt-1">Grafik Luas Wilayah Antar Dusun (Ha)</h2>
+                </div>
+                <a href="peta.html" class="inline-flex items-center gap-2 text-xs font-bold text-[#047857] hover:text-[#022c22] transition-colors">
+                    <span>Lihat Batas Dusun di Peta</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div id="grafikLuasContainer" class="space-y-4">
+                <!-- Bar chart horizontal di-render otomatis oleh JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#022c22] text-stone-300 py-12 px-6 border-t border-[#d4af37]/40 mt-auto">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="font-serif text-xl text-white font-semibold mb-1.5">Desa Beririjarak</h2>
+            <p class="text-xs text-stone-400 mb-6">Kecamatan Wanasaba, Kabupaten Lombok Timur, NTB.</p>
+            <p class="text-[11px] text-stone-500">&copy; 2026 Pemerintah Desa Beririjarak. All rights reserved.</p>
+            <p class="text-xs text-[#e2c275] font-semibold tracking-wider mt-2">KKN Universitas Hamzanwadi 2026</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT PENGOLAH DATA DEMOGRAFI & LUAS WILAYAH PER DUSUN -->
+    <script>
+        // =========================================================================
+        // EDIT DATA LUAS WILAYAH (HEKTAR) & PENDUDUK DI SINI SESUAI MONOGRAFI DESA
+        // =========================================================================
+        const dataDusun = [
+            { nama: "Dusun Senganton", luasHa: 85.40, kk: 210, penduduk: 745, karakter: "Wilayah Barat & Persawahan" },
+            { nama: "Dusun Otak Kebon Barat", luasHa: 62.15, kk: 185, penduduk: 650, karakter: "Permukiman & Pendidikan" },
+            { nama: "Dusun Otak Kebon", luasHa: 58.80, kk: 240, penduduk: 860, karakter: "Pusat Pemerintahan Desa" },
+            { nama: "Dusun Otak Kebon Timur", luasHa: 64.50, kk: 195, penduduk: 690, karakter: "Perdagangan & Pasar Desa" },
+            { nama: "Dusun Ambengan Timur", luasHa: 71.20, kk: 175, penduduk: 615, karakter: "Pertanian & Perkebunan" },
+            { nama: "Dusun Ambengan", luasHa: 68.90, kk: 205, penduduk: 720, karakter: "Permukiman & UMKM Lokal" },
+            { nama: "Dusun Beririjarak Timur", luasHa: 76.30, kk: 220, penduduk: 780, karakter: "Agrikultur & Jamur Tiram" },
+            { nama: "Dusun Beririjarak Utara", luasHa: 82.60, kk: 230, penduduk: 810, karakter: "Pertanian & Industri Rumahan" },
+            { nama: "Dusun Beririjarak Selatan", luasHa: 74.15, kk: 190, penduduk: 670, karakter: "Perkebunan Kakao & UMKM" }
+        ];
+
+        const formatAngka = (num, dec = 2) => {
+            return num.toLocaleString('id-ID', {
+                minimumFractionDigits: dec,
+                maximumFractionDigits: dec
+            });
+        };
+
+        const formatBulat = (num) => {
+            return num.toLocaleString('id-ID');
+        };
+
+        function renderDemografi(listData) {
+            const totalHa = dataDusun.reduce((sum, d) => sum + d.luasHa, 0);
+            const totalKm2 = totalHa / 100;
+            const totalKK = dataDusun.reduce((sum, d) => sum + d.kk, 0);
+            const totalPenduduk = dataDusun.reduce((sum, d) => sum + d.penduduk, 0);
+            const kepadatan = totalKm2 > 0 ? Math.round(totalPenduduk / totalKm2) : 0;
+
+            const terluas = [...dataDusun].sort((a, b) => b.luasHa - a.luasHa)[0];
+            const maxHa = terluas ? terluas.luasHa : 1;
+
+            // Update 4 Kartu Ringkasan
+            document.getElementById('statTotalHa').textContent = `${formatAngka(totalHa, 2)} Ha`;
+            document.getElementById('statTotalKm').textContent = `Setara ${formatAngka(totalKm2, 2)} km²`;
+            document.getElementById('statJumlahDusun').textContent = `${dataDusun.length} Dusun`;
+            document.getElementById('statTotalPenduduk').textContent = `${formatBulat(totalPenduduk)} Jiwa`;
+            document.getElementById('statTotalKK').textContent = `${formatBulat(totalKK)} Kepala Keluarga (KK)`;
+            document.getElementById('statKepadatan').textContent = `${formatBulat(kepadatan)} Jiwa/km²`;
+            document.getElementById('statDusunTerluas').textContent = terluas ? `Terluas: ${terluas.nama}` : 'Terluas: -';
+
+            // Render Baris Tabel
+            const tbody = document.getElementById('tabelDusunBody');
+            tbody.innerHTML = '';
+
+            listData.forEach((dusun, index) => {
+                const km2 = dusun.luasHa / 100;
+                const persen = totalHa > 0 ? (dusun.luasHa / totalHa) * 100 : 0;
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-amber-50/40 transition-colors';
+                tr.innerHTML = `
+                    <td class="py-4 px-6 text-center font-wi font-bold text-stone-400 text-xs">${index + 1}</td>
+                    <td class="py-4 px-6">
+                        <div class="font-bold text-[#022c22]">${dusun.nama}</div>
+                        <div class="text-[11px] text-stone-500">${dusun.karakter}</div>
+                    </td>
+                    <td class="py-4 px-6 text-right font-wi font-bold text-[#022c22]">${formatAngka(dusun.luasHa, 2)} Ha</td>
+                    <td class="py-4 px-6 text-right text-stone-600">${formatAngka(km2, 2)} km²</td>
+                    <td class="py-4 px-6">
+                        <div class="flex items-center gap-2.5">
+                            <div class="flex-1 h-2 rounded-full bg-stone-200 overflow-hidden">
+                                <div class="h-full rounded-full bg-gradient-to-r from-[#022c22] via-[#047857] to-[#d4af37]" style="width: ${persen.toFixed(1)}%"></div>
+                            </div>
+                            <span class="text-xs font-wi font-bold text-stone-700 w-12 text-right">${formatAngka(persen, 1)}%</span>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6 text-right">
+                        <div class="font-semibold text-stone-800">${formatBulat(dusun.penduduk)} Jiwa</div>
+                        <div class="text-[11px] text-stone-400">${formatBulat(dusun.kk)} KK</div>
+                    </td>
+                    <td class="py-4 px-6 text-center">
+                        <a href="peta.html" title="Lihat ${dusun.nama} di Peta" class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#022c22] hover:bg-[#047857] text-[#e2c275] transition-colors">
+                            <i class="fa-solid fa-location-dot text-xs"></i>
+                        </a>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Render Total Footer Tabel
+            const tfoot = document.getElementById('tabelDusunFoot');
+            tfoot.innerHTML = `
+                <tr>
+                    <td colspan="2" class="py-4 px-6 font-wi uppercase tracking-wider text-xs text-[#e2c275]">Total Keseluruhan Desa Beririjarak</td>
+                    <td class="py-4 px-6 text-right font-wi text-[#e2c275]">${formatAngka(totalHa, 2)} Ha</td>
+                    <td class="py-4 px-6 text-right text-stone-200">${formatAngka(totalKm2, 2)} km²</td>
+                    <td class="py-4 px-6 text-right font-wi text-[#e2c275]">100,0%</td>
+                    <td class="py-4 px-6 text-right text-white">${formatBulat(totalPenduduk)} Jiwa</td>
+                    <td class="py-4 px-6"></td>
+                </tr>
+            `;
+
+            // Render Grafik Batang Horizontal
+            const grafikContainer = document.getElementById('grafikLuasContainer');
+            grafikContainer.innerHTML = '';
+
+            listData.forEach((dusun) => {
+                const lebarBar = (dusun.luasHa / maxHa) * 100;
+                const barItem = document.createElement('div');
+                barItem.className = 'space-y-1.5';
+                barItem.innerHTML = `
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="font-bold text-[#022c22]">${dusun.nama}</span>
+                        <span class="font-wi font-bold text-[#047857]">${formatAngka(dusun.luasHa, 2)} Ha <span class="text-stone-400 font-normal">(${formatAngka(dusun.luasHa / 100, 2)} km²)</span></span>
+                    </div>
+                    <div class="w-full h-3 rounded-full bg-stone-100 border border-stone-200/80 overflow-hidden">
+                        <div class="h-full rounded-full bg-gradient-to-r from-[#022c22] via-[#065f46] to-[#d4af37] transition-all duration-500" style="width: ${lebarBar.toFixed(1)}%"></div>
+                    </div>
+                `;
+                grafikContainer.appendChild(barItem);
+            });
+        }
+
+        // Kontrol Pengurutan
+        const btnSortDefault = document.getElementById('btnSortDefault');
+        const btnSortLuas = document.getElementById('btnSortLuas');
+
+        btnSortDefault.addEventListener('click', () => {
+            renderDemografi(dataDusun);
+            btnSortDefault.className = 'px-3.5 py-2 rounded-full text-xs font-semibold bg-[#064e3b] text-[#e2c275] border border-[#d4af37]/50 hover:bg-[#047857] transition-colors';
+            btnSortLuas.className = 'px-3.5 py-2 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors';
+        });
+
+        btnSortLuas.addEventListener('click', () => {
+            const sorted = [...dataDusun].sort((a, b) => b.luasHa - a.luasHa);
+            renderDemografi(sorted);
+            btnSortLuas.className = 'px-3.5 py-2 rounded-full text-xs font-semibold bg-[#064e3b] text-[#e2c275] border border-[#d4af37]/50 hover:bg-[#047857] transition-colors';
+            btnSortDefault.className = 'px-3.5 py-2 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors';
+        });
+
+        // Inisialisasi awal
+        renderDemografi(dataDusun);
+    </script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potensi Desa Beririjarak - Eksplorasi Desa</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Montserrat (Gaya Wonderful Indonesia), Playfair Display & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-wi { font-family: 'Montserrat', sans-serif; }
+        
+        /* Transisi Halus Antar Slide */
+        .hero-slide {
+            transition: opacity 1.4s ease-in-out, transform 7s ease-out;
+        }
+
+        /* Animasi Muncul Teks Judul Slide */
+        @keyframes titleFadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-title {
+            animation: titleFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Gradasi Kabut 7-Tahap (Tanpa Garis Patah / Banding) */
+        .hero-mist-fade {
+            background: linear-gradient(
+                to top,
+                #ffffff 0%,
+                rgba(255, 255, 255, 0.96) 18%,
+                rgba(255, 255, 255, 0.80) 36%,
+                rgba(255, 255, 255, 0.52) 54%,
+                rgba(255, 255, 255, 0.24) 72%,
+                rgba(255, 255, 255, 0.07) 88%,
+                rgba(255, 255, 255, 0) 100%
+            );
+        }
+
+        /* Efek Blur Lembut yang Memudar ke Atas */
+        .hero-mist-blur {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            mask-image: linear-gradient(to top, black 20%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 20%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="bg-white text-stone-800 antialiased selection:bg-[#047857] selection:text-white">
+
+    <!-- NAVBAR HIJAU TUA PEKAT (#022c22) + AKSEN GOLD -->
+    <nav id="navbar" class="sticky top-0 w-full z-50 border-t-[3px] border-t-[#d4af37] bg-[#022c22]/95 backdrop-blur-md border-b border-[#d4af37]/40 shadow-[0_4px_20px_rgba(2,44,34,0.35)] transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
+            
+            <!-- POJOK KIRI ATAS: LOGO POTENSI DESA BERIRIJARAK -->
+            <a href="index.html" class="flex items-center gap-3 group shrink-0">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#d4af37] via-[#e2c275] to-[#047857] p-[2px] shadow-md shadow-black/30 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-[#022c22] rounded-[14px] flex items-center justify-center">
+                        <i class="fa-solid fa-feather-pointed text-lg text-[#e2c275]"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col font-wi">
+                    <span class="text-[9px] font-bold tracking-[0.22em] text-[#e2c275] uppercase leading-none">
+                        Kecamatan Wanasaba
+                    </span>
+                    <span class="text-base sm:text-lg font-extrabold tracking-tight text-white uppercase leading-tight mt-0.5">
+                        Potensi Desa
+                    </span>
+                    <span class="text-xs sm:text-sm font-extrabold tracking-widest text-[#d4af37] uppercase leading-none">
+                        Beririjarak
+                    </span>
+                </div>
+            </a>
+
+            <!-- MENU NAVIGASI TENGAH -->
+            <div class="hidden md:flex items-center space-x-2 text-[13px] font-semibold text-stone-300">
+                <a href="index.html" class="px-4 py-2 rounded-full bg-[#064e3b] text-[#e2c275] font-bold border border-[#d4af37]/50 shadow-xs">Beranda</a>
+                <a href="#potensi" class="px-4 py-2 rounded-full hover:text-[#e2c275] hover:bg-[#064e3b]/60 transition-colors">Eksplorasi</a>
+                <a href="demografi.html" class="px-4 py-2 rounded-full hover:text-[#e2c275] hover:bg-[#064e3b]/60 transition-colors">Demografi</a>
+                <a href="fasilitas.html" class="px-4 py-2 rounded-full hover:text-[#e2c275] hover:bg-[#064e3b]/60 transition-colors">Fasilitas</a>
+            </div>
+
+            <!-- TOMBOL KANAN -->
+            <div class="flex items-center gap-3">
+                <a href="peta.html" class="bg-gradient-to-r from-[#064e3b] via-[#047857] to-[#065f46] hover:from-[#047857] hover:to-[#059669] text-white font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 text-xs shadow-md shadow-black/30 ring-2 ring-[#d4af37]/60">
+                    <i class="fa-solid fa-map-location-dot text-[#e2c275]"></i>
+                    <span>Buka Peta Interaktif</span>
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- HERO BANNER ALA WONDERFUL INDONESIA + 4 POTENSI DESA -->
+    <header class="relative h-[86vh] min-h-[580px] w-full flex flex-col justify-between items-center overflow-hidden bg-[#022c22]">
+        
+        <!-- Container Slide Gambar Pulau Lombok -->
+        <div id="heroSlideshow" class="absolute inset-0 z-0">
+            <!-- Slide 1: Potensi Desa -->
+            <img src="assets/img/4.jpg" 
+                 onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='assets/img/slide-lombok-1.jpeg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='assets/img/slide-lombok-1.jpg.jpeg';}else{this.onerror=null;}"
+                 alt="Potensi Desa Beririjarak" 
+                 class="hero-slide absolute inset-0 w-full h-full object-cover opacity-100 scale-100">
+            
+            <!-- Slide 2: Budidaya Jamur -->
+            <img src="assets/img/1.jpg" 
+                 onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='assets/img/slide-lombok-2.jpeg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='assets/img/slide-lombok-2.jpg.jpeg';}else{this.onerror=null;}"
+                 alt="Budidaya Jamur Beririjarak" 
+                 class="hero-slide absolute inset-0 w-full h-full object-cover opacity-0 scale-105">
+            
+            <!-- Slide 3: Kakao Asli -->
+            <img src="assets/img/3.jpg" 
+                 onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='assets/img/slide-lombok-3.jpeg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='assets/img/slide-lombok-3.jpg.jpeg';}else{this.onerror=null;}"
+                 alt="Kakao Asli Beririjarak" 
+                 class="hero-slide absolute inset-0 w-full h-full object-cover opacity-0 scale-105">
+            
+            <!-- Slide 4: UMKM Kreatif -->
+            <img src="assets/img/2.jpg" 
+                 onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='assets/img/slide-lombok-4.jpeg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='assets/img/slide-lombok-4.jpg.jpeg';}else{this.onerror=null;}"
+                 alt="UMKM Kreatif Desa Beririjarak" 
+                 class="hero-slide absolute inset-0 w-full h-full object-cover opacity-0 scale-105">
+        </div>
+        
+        <!-- Overlay Gelap Atas-Tengah (Memudar ke Bawah agar Kabut Putih Tetap Cerah Bersih) -->
+        <div class="absolute inset-0 z-[1] bg-gradient-to-b from-black/40 via-black/25 to-transparent pointer-events-none"></div>
+
+        <!-- Lapisan Blur Halus di Tepi Bawah Foto -->
+        <div class="absolute inset-x-0 bottom-0 h-32 z-[2] hero-mist-blur pointer-events-none"></div>
+
+        <!-- Efek Kabut Putih Berlapis yang Menyatu Mulus dengan Halaman -->
+        <div class="absolute inset-x-0 bottom-0 h-52 z-[3] hero-mist-fade pointer-events-none"></div>
+        
+        <!-- Spacer Atas -->
+        <div class="h-8 relative z-10"></div>
+
+        <!-- KONTEN UTAMA TENGAH: NAMA POTENSI DESA BERGANTI OTOMATIS -->
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            
+            <!-- Keterangan Kategori -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/25 text-white text-[11px] font-semibold tracking-[0.25em] uppercase mb-5 shadow-md">
+                <i class="fa-solid fa-leaf text-[#fbbf24]"></i>
+                <span id="slideSubtitle">DESA BERIRIJARAK &bull; KECAMATAN WANASABA</span>
+            </div>
+            
+            <!-- JUDUL BESAR POTENSI DESA -->
+            <div id="slideTitleWrapper" class="animate-slide-title">
+                <h1 id="slideMainTitle" class="font-wi text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tight leading-[1.05] drop-shadow-[0_6px_24px_rgba(0,0,0,0.65)]">
+                    POTENSI DESA
+                </h1>
+            </div>
+            
+            <!-- Subjudul Singkat -->
+            <p class="text-xs sm:text-sm md:text-base text-white/95 font-medium mt-5 mb-8 max-w-xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                Menyusuri keindahan alam tersembunyi, kearifan lokal, serta pusat agrikultur dan UMKM kreatif di tanah Wanasaba.
+            </p>
+            
+            <!-- Tombol Aksi -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+                <a href="peta.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#047857] hover:bg-[#022c22] text-white text-xs font-bold tracking-wider uppercase py-3.5 px-7 rounded-full transition-all duration-300 shadow-lg">
+                    <i class="fa-solid fa-compass text-[#fbbf24]"></i> Jelajahi Peta Desa
+                </a>
+                <a href="#potensi" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/90 hover:bg-white text-stone-900 text-xs font-bold tracking-wider uppercase py-3.5 px-7 rounded-full transition-all duration-300 shadow-lg">
+                    <span>Lihat Potensi</span>
+                    <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- INDIKATOR SLIDE 4 POTENSI DI BAGIAN BAWAH BANNER -->
+        <div class="relative z-10 pb-6 flex flex-col items-center gap-2.5">
+            <div id="slideIndicators" class="flex flex-wrap justify-center items-center gap-2 px-4">
+                <!-- Di-generate otomatis oleh JavaScript -->
+            </div>
+            <span id="slideCounter" class="text-[10px] font-wi font-bold tracking-[0.2em] text-stone-600 uppercase">
+                01 / 04 POTENSI
+            </span>
+        </div>
+    </header>
+
+    <!-- SECTION EKSPLORASI POTENSI -->
+    <section id="potensi" class="py-20 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            
+            <div class="text-center max-w-xl mx-auto mb-16">
+                <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-[#047857]">Eksplorasi Wilayah</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-stone-900 mt-2 mb-4">Potensi Desa Beririjarak</h2>
+                <div class="w-12 h-[2px] bg-[#d4af37] mx-auto"></div>
+            </div>
+
+            <!-- Grid Kartu Potensi -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Kartu 1: Wisata Alam -->
+                <a href="peta.html?filter=potensi" class="group bg-[#faf9f6] rounded-2xl overflow-hidden border border-stone-200/80 hover:border-[#047857]/50 hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <div class="relative h-60 overflow-hidden bg-emerald-950/10 flex items-center justify-center">
+                        <i class="fa-solid fa-mountain-sun text-4xl text-stone-300 absolute"></i>
+                        <img src="assets/img/slide-lombok-1.jpg" 
+                             onerror="if(!this.dataset.step){this.dataset.step='1';this.src='assets/img/slide-lombok-1.jpeg';}else if(this.dataset.step==='1'){this.dataset.step='2';this.src='assets/img/slide-lombok-1.jpg.jpeg';}else if(this.dataset.step==='2'){this.dataset.step='3';this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80';}else{this.style.display='none';}" 
+                             alt="Wisata Alam" 
+                             class="relative z-10 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-7">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-[#047857] mb-2">Wisata Alam</p>
+                        <h3 class="text-xl font-serif font-bold text-stone-900 mb-2 group-hover:text-[#047857] transition-colors">Ekowisata &amp; Terasering</h3>
+                        <p class="text-xs text-stone-500 leading-relaxed">Panorama alam hijau di kaki Gunung Rinjani dengan udara sejuk dan area persawahan.</p>
+                    </div>
+                </a>
+
+                <!-- Kartu 2: Ekonomi Kreatif -->
+                <a href="peta.html?filter=potensi" class="group bg-[#faf9f6] rounded-2xl overflow-hidden border border-stone-200/80 hover:border-[#047857]/50 hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <div class="relative h-60 overflow-hidden bg-emerald-950/10 flex items-center justify-center">
+                        <i class="fa-solid fa-store text-4xl text-stone-300 absolute"></i>
+                        <img src="assets/img/umkm.jpg" 
+                             onerror="if(!this.dataset.step){this.dataset.step='1';this.src='assets/img/slide-lombok-3.jpg';}else if(this.dataset.step==='1'){this.dataset.step='2';this.src='assets/img/slide-lombok-3.jpeg';}else if(this.dataset.step==='2'){this.dataset.step='3';this.src='assets/img/slide-lombok-3.jpg.jpeg';}else if(this.dataset.step==='3'){this.dataset.step='4';this.src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80';}else{this.style.display='none';}" 
+                             alt="UMKM & Kriya Lokal" 
+                             class="relative z-10 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-7">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-[#047857] mb-2">Ekonomi Kreatif</p>
+                        <h3 class="text-xl font-serif font-bold text-stone-900 mb-2 group-hover:text-[#047857] transition-colors">UMKM &amp; Kriya Lokal</h3>
+                        <p class="text-xs text-stone-500 leading-relaxed">Produk olahan kakao, kopi lokal, gula gending, dan kerajinan masyarakat desa.</p>
+                    </div>
+                </a>
+
+                <!-- Kartu 3: Pertanian -->
+                <a href="peta.html?filter=potensi" class="group bg-[#faf9f6] rounded-2xl overflow-hidden border border-stone-200/80 hover:border-[#047857]/50 hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <div class="relative h-60 overflow-hidden bg-emerald-950/10 flex items-center justify-center">
+                        <i class="fa-solid fa-seedling text-4xl text-stone-300 absolute"></i>
+                        <img src="assets/img/jamur.jpg" 
+                             onerror="if(!this.dataset.step){this.dataset.step='1';this.src='assets/img/slide-lombok-2.jpg';}else if(this.dataset.step==='1'){this.dataset.step='2';this.src='assets/img/slide-lombok-2.jpeg';}else if(this.dataset.step==='2'){this.dataset.step='3';this.src='assets/img/slide-lombok-2.jpg.jpeg';}else if(this.dataset.step==='3'){this.dataset.step='4';this.src='https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80';}else{this.style.display='none';}" 
+                             alt="Pertanian" 
+                             class="relative z-10 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-7">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-[#047857] mb-2">Pertanian</p>
+                        <h3 class="text-xl font-serif font-bold text-stone-900 mb-2 group-hover:text-[#047857] transition-colors">Agrikultur Jamur Tiram</h3>
+                        <p class="text-xs text-stone-500 leading-relaxed">Budidaya jamur tiram dan pemanfaatan limbah organik berkelanjutan.</p>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#022c22] text-stone-300 py-12 px-6 border-t border-[#d4af37]/40">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="font-serif text-xl text-white font-semibold mb-1.5">Desa Beririjarak</h2>
+            <p class="text-xs text-stone-400 mb-6">Kecamatan Wanasaba, Kabupaten Lombok Timur, NTB.</p>
+            <p class="text-[11px] text-stone-500">&copy; 2026 Pemerintah Desa Beririjarak. All rights reserved.</p>
+            <p class="text-xs text-[#e2c275] font-semibold tracking-wider mt-2">KKN Universitas Hamzanwadi 2026</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT SLIDESHOW 4 POTENSI DESA BERIRIJARAK -->
+    <script>
+        const daftarPotensiSlide = [
+            { nama: "POTENSI DESA", ket: "DESA BERIRIJARAK &bull; KECAMATAN WANASABA", imgIndex: 0 },
+            { nama: "BUDIDAYA JAMUR", ket: "SEKTOR PERTANIAN &bull; JAMUR TIRAM UNGGULAN", imgIndex: 1 },
+            { nama: "KAKAO ASLI", ket: "HASIL PERKEBUNAN &bull; KOMODITAS LOKAL", imgIndex: 2 },
+            { nama: "UMKM KREATIF DESA", ket: "EKONOMI KREATIF &bull; KRIYA & OLAHAN LOKAL", imgIndex: 3 }
+        ];
+
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicatorsContainer = document.getElementById('slideIndicators');
+        const titleWrapper = document.getElementById('slideTitleWrapper');
+        const mainTitle = document.getElementById('slideMainTitle');
+        const subTitle = document.getElementById('slideSubtitle');
+        const counterText = document.getElementById('slideCounter');
+
+        let currentIndex = 0;
+        let slideTimer;
+
+        // Buat tombol indikator untuk 4 slide potensi
+        daftarPotensiSlide.forEach((item, idx) => {
+            const btn = document.createElement('button');
+            btn.setAttribute('aria-label', item.nama);
+            btn.title = item.nama;
+            btn.className = idx === 0
+                ? 'potensi-dot w-8 h-2 rounded-full bg-[#047857] transition-all duration-300 shadow-sm'
+                : 'potensi-dot w-2.5 h-2 rounded-full bg-stone-400/70 hover:bg-[#047857] transition-all duration-300';
+            btn.addEventListener('click', () => goToPotensiSlide(idx));
+            indicatorsContainer.appendChild(btn);
+        });
+
+        const dots = document.querySelectorAll('.potensi-dot');
+
+        function renderPotensiSlide(index) {
+            const item = daftarPotensiSlide[index];
+
+            // 1. Ganti gambar latar sesuai urutan slide (0 - 3)
+            slides.forEach((slide, i) => {
+                if (i === item.imgIndex) {
+                    slide.classList.remove('opacity-0', 'scale-105');
+                    slide.classList.add('opacity-100', 'scale-100');
+                } else {
+                    slide.classList.remove('opacity-100', 'scale-100');
+                    slide.classList.add('opacity-0', 'scale-105');
+                }
+            });
+
+            // 2. Perbarui judul besar dan sub-label kategori dengan animasi halus
+            titleWrapper.classList.remove('animate-slide-title');
+            void titleWrapper.offsetWidth;
+            mainTitle.textContent = item.nama;
+            subTitle.innerHTML = item.ket;
+            titleWrapper.classList.add('animate-slide-title');
+
+            // 3. Perbarui nomor urut & indikator titik bawah
+            counterText.textContent = `0${index + 1} / 0${daftarPotensiSlide.length} POTENSI`;
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('w-2.5', 'bg-stone-400/70');
+                    dot.classList.add('w-8', 'bg-[#047857]');
+                } else {
+                    dot.classList.remove('w-8', 'bg-[#047857]');
+                    dot.classList.add('w-2.5', 'bg-stone-400/70');
+                }
+            });
+
+            currentIndex = index;
+        }
+
+        function nextPotensiSlide() {
+            const next = (currentIndex + 1) % daftarPotensiSlide.length;
+            renderPotensiSlide(next);
+        }
+
+        function goToPotensiSlide(index) {
+            clearInterval(slideTimer);
+            renderPotensiSlide(index);
+            slideTimer = setInterval(nextPotensiSlide, 4500);
+        }
+
+        // Jalankan pergantian slide otomatis setiap 4,5 detik
+        slideTimer = setInterval(nextPotensiSlide, 4500);
+    </script>
+</body>
+</html>

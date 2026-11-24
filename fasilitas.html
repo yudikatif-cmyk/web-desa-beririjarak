@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Lokasi Terdata - Pesona Beririjarak</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-[#fcfbf9] text-gray-800 flex flex-col min-h-screen antialiased">
+
+    <!-- Navbar Utama -->
+    <nav class="bg-[#022c22] py-4 px-6 lg:px-12 shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2.5 text-2xl font-bold font-serif text-white tracking-wide">
+                <div class="w-9 h-9 rounded-full bg-[#047857] flex items-center justify-center text-[#d4af37] shadow-md">
+                    <i class="fa-solid fa-leaf text-sm"></i>
+                </div>
+                <span>Beririjarak</span>
+            </a>
+            <div class="flex items-center gap-3">
+                <a href="peta.html" class="hidden sm:inline-flex text-xs font-semibold text-white bg-[#047857] hover:bg-emerald-600 px-4 py-2 rounded-full transition items-center gap-2">
+                    <i class="fa-solid fa-map"></i> Buka Peta Interaktif
+                </a>
+                <a href="index.html" class="text-xs font-semibold text-emerald-100 hover:text-[#d4af37] bg-white/10 px-4 py-2 rounded-full transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Beranda
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Halaman Daftar Lokasi -->
+    <header class="relative bg-gradient-to-br from-[#022c22] via-[#047857] to-[#022c22] text-white py-14 px-6 text-center overflow-hidden shadow-lg">
+        <div class="absolute -left-10 -bottom-10 w-48 h-48 bg-[#d4af37] opacity-10 rounded-full blur-3xl"></div>
+        <div class="relative z-10 max-w-3xl mx-auto">
+            <span class="text-[#d4af37] text-xs font-bold tracking-[0.25em] uppercase mb-2 block">Direktori Spasial Desa</span>
+            <h1 class="text-3xl md:text-5xl font-serif font-bold mb-3">Daftar Lokasi Terdata</h1>
+            <p class="text-emerald-100/90 text-sm font-light leading-relaxed">
+                Seluruh titik fasilitas umum, tempat ibadah, pusat pendidikan, ekonomi UMKM, serta potensi alam dan pertanian di dalam wilayah administrasi Desa Beririjarak.
+            </p>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="container mx-auto px-4 sm:px-6 py-12 max-w-7xl flex-grow space-y-8">
+        
+        <!-- Bar Pencarian & Filter Kategori -->
+        <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-4">
+            
+            <!-- Tombol Filter Kategori -->
+            <div id="categoryFilters" class="flex flex-wrap items-center gap-2">
+                <button data-kategori="Semua" class="filter-btn active px-4 py-2 rounded-full text-xs font-semibold bg-[#022c22] text-white transition">
+                    Semua Lokasi (<span id="countAll">0</span>)
+                </button>
+                <button data-kategori="Fasilitas Umum" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-emerald-50 hover:text-[#047857] transition">
+                    Fasilitas & Pendidikan
+                </button>
+                <button data-kategori="Tempat Ibadah" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-emerald-50 hover:text-[#047857] transition">
+                    Tempat Ibadah
+                </button>
+                <button data-kategori="Ekonomi & UMKM" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-emerald-50 hover:text-[#047857] transition">
+                    Ekonomi & UMKM
+                </button>
+                <button data-kategori="Pertanian" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-emerald-50 hover:text-[#047857] transition">
+                    Pertanian & Wisata
+                </button>
+            </div>
+
+            <!-- Input Pencarian -->
+            <div class="relative w-full lg:w-72 shrink-0">
+                <input type="text" id="searchLokasi" placeholder="Cari nama lokasi atau deskripsi..." class="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-gray-200 bg-gray-50/50 focus:bg-white text-xs focus:outline-none focus:ring-2 focus:ring-[#047857] transition">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+            </div>
+        </div>
+
+        <!-- Grid Kartu Daftar Lokasi (Terisi Otomatis dari app.js) -->
+        <div id="lokasiGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Placeholder Loading -->
+            <div class="col-span-full text-center py-12 text-gray-400 text-sm">
+                <i class="fa-solid fa-spinner fa-spin mr-2"></i> Memuat data lokasi dari peta...
+            </div>
+        </div>
+
+        <!-- Tombol Aksi ke Peta -->
+        <div class="text-center pt-6">
+            <a href="peta.html" class="inline-flex items-center gap-3 bg-[#047857] hover:bg-[#022c22] text-white font-bold py-3.5 px-8 rounded-full transition duration-300 shadow-lg text-sm">
+                <i class="fa-solid fa-map-location-dot"></i> Eksplorasi Semua Titik di Peta Satelit
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer Elegan -->
+    <footer class="bg-[#022c22] text-white pt-10 pb-8 border-t-[6px] border-[#d4af37]">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
+            <h2 class="text-2xl font-serif font-bold mb-2">Desa Beririjarak</h2>
+            <p class="text-gray-400 text-xs mb-4">Kecamatan Wanasaba, Kabupaten Lombok Timur, NTB.</p>
+            <p class="text-[11px] text-gray-500">&copy; 2026 Pemerintah Desa Beririjarak. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Muat Data Lokasi dari app.js -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Script Render & Filter Kartu Lokasi -->
+    <script>
+        let lokasiValidDesa = [];
+        let kategoriAktif = "Semua";
+
+        // Fungsi pengecekan titik di dalam poligon batas desa
+        function cekDalamDesa(lat, lng, polygonCoords) {
+            let inside = false;
+            for (let i = 0, j = polygonCoords.length - 1; i < polygonCoords.length; j = i++) {
+                const xi = polygonCoords[i][1], yi = polygonCoords[i][0];
+                const xj = polygonCoords[j][1], yj = polygonCoords[j][0];
+                const intersect = ((yi > lng) !== (yj > lng)) &&
+                    (lat < (xj - xi) * (lng - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+            return inside;
+        }
+
+        // Ambil batas desa dan saring data dari desaPotensi (app.js)
+        fetch('data/batas_desa.geojson')
+            .then(res => res.json())
+            .then(geoData => {
+                const koordinatBatas = geoData.features[0].geometry.coordinates[0];
+                if (typeof desaPotensi !== 'undefined') {
+                    lokasiValidDesa = desaPotensi.filter(item => cekDalamDesa(item.lat, item.lng, koordinatBatas));
+                }
+                document.getElementById('countAll').textContent = lokasiValidDesa.length;
+                renderLokasi();
+            })
+            .catch(() => {
+                // Fallback jika GeoJSON gagal dimuat
+                if (typeof desaPotensi !== 'undefined') {
+                    lokasiValidDesa = desaPotensi;
+                    document.getElementById('countAll').textContent = lokasiValidDesa.length;
+                    renderLokasi();
+                }
+            });
+
+        function renderLokasi() {
+            const grid = document.getElementById('lokasiGrid');
+            const keyword = document.getElementById('searchLokasi').value.toLowerCase();
+
+            const hasilFilter = lokasiValidDesa.filter(item => {
+                const cocokKategori = kategoriAktif === "Semua" || 
+                    item.kategori.toLowerCase().includes(kategoriAktif.toLowerCase()) ||
+                    (kategoriAktif === "Pertanian" && (item.kategori.toLowerCase().includes("wisata") || item.kategori.toLowerCase().includes("pertanian"))) ||
+                    (kategoriAktif === "Fasilitas Umum" && (item.kategori.toLowerCase().includes("fasilitas") || item.kategori.toLowerCase().includes("pendidikan") || item.kategori.toLowerCase().includes("pemerintahan")));
+
+                const cocokKata = item.nama.toLowerCase().includes(keyword) || 
+                                  item.deskripsi.toLowerCase().includes(keyword) ||
+                                  item.kategori.toLowerCase().includes(keyword);
+
+                return cocokKategori && cocokKata;
+            });
+
+            if (hasilFilter.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-white rounded-3xl p-12 text-center border border-gray-100">
+                        <i class="fa-solid fa-map-pin text-3xl text-gray-300 mb-3"></i>
+                        <p class="text-sm font-semibold text-gray-700">Lokasi tidak ditemukan</p>
+                        <p class="text-xs text-gray-400 mt-1">Coba gunakan kata kunci lain atau pilih filter "Semua Lokasi".</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = hasilFilter.map(item => `
+                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <!-- Penampung Foto dengan Fallback Otomatis -->
+                        <div class="relative h-44 w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center overflow-hidden">
+                            <i class="fa-solid ${item.iconFa || 'fa-location-dot'} text-4xl text-gray-300 absolute"></i>
+                            <img src="${item.foto}" alt="${item.nama}" onerror="this.style.display='none'" class="w-full h-full object-cover relative z-10 group-hover:scale-105 transition-transform duration-500">
+                            
+                            <!-- Badge Kategori -->
+                            <span class="absolute top-3 left-3 z-20 bg-white/95 backdrop-blur-md text-[#022c22] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+                                <i class="fa-solid ${item.iconFa || 'fa-location-dot'} text-[#d4af37]"></i> ${item.kategori}
+                            </span>
+                        </div>
+
+                        <!-- Detail Lokasi -->
+                        <div class="p-6">
+                            <h3 class="text-lg font-serif font-bold text-gray-900 leading-snug group-hover:text-[#047857] transition-colors">
+                                ${item.nama}
+                            </h3>
+                            <p class="text-xs text-gray-500 mt-2 leading-relaxed line-clamp-2">
+                                ${item.deskripsi}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Footer Kartu: Koordinat & Aksi -->
+                    <div class="px-6 pb-5 pt-3 border-t border-gray-50 flex items-center justify-between gap-2">
+                        <span class="text-[10px] text-gray-400 font-mono">
+                            <i class="fa-solid fa-crosshairs text-[#047857] mr-1"></i>${item.lat.toFixed(5)}, ${item.lng.toFixed(5)}
+                        </span>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lng}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-[#047857] hover:bg-[#022c22] text-white text-[11px] font-semibold px-3.5 py-1.5 rounded-full transition">
+                            <i class="fa-solid fa-route"></i> Rute
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Event Listener Tombol Filter Kategori
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-[#022c22]', 'text-white');
+                    b.classList.add('bg-gray-100', 'text-gray-600');
+                });
+                btn.classList.remove('bg-gray-100', 'text-gray-600');
+                btn.classList.add('bg-[#022c22]', 'text-white');
+
+                kategoriAktif = btn.getAttribute('data-kategori');
+                renderLokasi();
+            });
+        });
+
+        // Event Listener Pencarian
+        document.getElementById('searchLokasi').addEventListener('input', renderLokasi);
+    </script>
+</body>
+</html>
