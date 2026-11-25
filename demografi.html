@@ -24,29 +24,29 @@
 
     <!-- NAVBAR HIJAU TUA PEKAT (#022c22) + AKSEN GOLD (#e2c275 / #d4af37) -->
     <nav id="navbar" class="sticky top-0 w-full z-50 bg-[#022c22]/95 backdrop-blur-md border-b border-[#d4af37]/40 shadow-md transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-20 flex justify-between items-center gap-2">
             
             <!-- POJOK KIRI ATAS: LOGO POTENSI DESA BERIRIJARAK -->
-            <a href="index.html" class="flex items-center gap-3 group shrink-0">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#d4af37] via-[#e2c275] to-[#047857] p-[2px] shadow-sm group-hover:scale-105 transition-transform">
+            <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-[#d4af37] via-[#e2c275] to-[#047857] p-[2px] shadow-sm group-hover:scale-105 transition-transform">
                     <div class="w-full h-full bg-[#022c22] rounded-[14px] flex items-center justify-center">
-                        <i class="fa-solid fa-feather-pointed text-lg text-[#e2c275]"></i>
+                        <i class="fa-solid fa-feather-pointed text-base sm:text-lg text-[#e2c275]"></i>
                     </div>
                 </div>
                 <div class="flex flex-col font-wi">
-                    <span class="text-[9px] font-bold tracking-[0.22em] text-[#e2c275] uppercase leading-none">
+                    <span class="text-[8px] sm:text-[9px] font-bold tracking-[0.22em] text-[#e2c275] uppercase leading-none">
                         Kecamatan Wanasaba
                     </span>
-                    <span class="text-base sm:text-lg font-extrabold tracking-tight text-white uppercase leading-tight mt-0.5">
+                    <span class="text-sm sm:text-lg font-extrabold tracking-tight text-white uppercase leading-tight mt-0.5">
                         Potensi Desa
                     </span>
-                    <span class="text-xs sm:text-sm font-extrabold tracking-widest text-[#d4af37] uppercase leading-none">
+                    <span class="text-[11px] sm:text-sm font-extrabold tracking-widest text-[#d4af37] uppercase leading-none">
                         Beririjarak
                     </span>
                 </div>
             </a>
 
-            <!-- MENU NAVIGASI TENGAH -->
+            <!-- MENU NAVIGASI TENGAH (DESKTOP) -->
             <div class="hidden md:flex items-center space-x-8 text-[13px] font-semibold text-stone-300">
                 <a href="index.html" class="hover:text-[#e2c275] transition-colors">Beranda</a>
                 <a href="index.html#potensi" class="hover:text-[#e2c275] transition-colors">Eksplorasi</a>
@@ -54,14 +54,45 @@
                 <a href="fasilitas.html" class="hover:text-[#e2c275] transition-colors">Fasilitas</a>
             </div>
 
-            <!-- TOMBOL KANAN -->
-            <div class="flex items-center gap-3">
-                <a href="peta.html" class="bg-[#064e3b] hover:bg-[#047857] text-white border border-[#d4af37]/60 font-semibold px-5 py-2.5 rounded-full transition-colors duration-300 flex items-center gap-2 text-xs shadow-sm">
+            <!-- TOMBOL KANAN & HAMBURGER MENU HP -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <a href="peta.html" class="bg-[#064e3b] hover:bg-[#047857] text-white border border-[#d4af37]/60 font-semibold px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full transition-colors duration-300 flex items-center gap-2 text-[11px] sm:text-xs shadow-sm">
                     <i class="fa-solid fa-map-location-dot text-[#e2c275]"></i>
-                    <span>Buka Peta Interaktif</span>
+                    <span class="hidden sm:inline">Buka Peta Interaktif</span>
+                    <span class="sm:hidden">Peta</span>
                 </a>
+
+                <!-- TOMBOL MENU GARIS TIGA (KHUSUS HP) -->
+                <button id="mobileMenuBtn" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false"
+                        class="md:hidden w-10 h-10 rounded-xl bg-[#064e3b]/90 hover:bg-[#047857] border border-[#d4af37]/60 text-[#e2c275] flex items-center justify-center transition-colors shadow-sm">
+                    <i id="mobileMenuIcon" class="fa-solid fa-bars text-base"></i>
+                </button>
             </div>
 
+        </div>
+
+        <!-- DROPDOWN MENU NAVIGASI KHUSUS HP -->
+        <div id="mobileMenu" class="hidden md:hidden bg-[#022c22] border-t border-[#d4af37]/30 px-4 pt-2.5 pb-4 space-y-1 text-sm font-semibold text-stone-200 shadow-xl">
+            <a href="index.html" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl hover:bg-[#064e3b] hover:text-[#e2c275] transition-colors">
+                <i class="fa-solid fa-house w-4 text-center text-[#e2c275]"></i>
+                <span>Beranda</span>
+            </a>
+            <a href="index.html#potensi" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl hover:bg-[#064e3b] hover:text-[#e2c275] transition-colors">
+                <i class="fa-solid fa-compass w-4 text-center text-[#e2c275]"></i>
+                <span>Eksplorasi</span>
+            </a>
+            <a href="demografi.html" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-[#064e3b]/80 text-[#e2c275] border border-[#d4af37]/30 font-bold">
+                <i class="fa-solid fa-chart-pie w-4 text-center text-[#e2c275]"></i>
+                <span>Demografi</span>
+            </a>
+            <a href="fasilitas.html" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl hover:bg-[#064e3b] hover:text-[#e2c275] transition-colors">
+                <i class="fa-solid fa-building w-4 text-center text-[#e2c275]"></i>
+                <span>Fasilitas</span>
+            </a>
+            <a href="peta.html" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl hover:bg-[#064e3b] hover:text-[#e2c275] transition-colors">
+                <i class="fa-solid fa-map-location-dot w-4 text-center text-[#e2c275]"></i>
+                <span>Peta Interaktif</span>
+            </a>
         </div>
     </nav>
 
@@ -217,8 +248,28 @@
         </div>
     </footer>
 
-    <!-- SCRIPT PENGOLAH DATA DEMOGRAFI & LUAS WILAYAH PER DUSUN -->
+    <!-- SCRIPT MENU MOBILE & PENGOLAH DATA DEMOGRAFI -->
     <script>
+        // =========================================================================
+        // TOGGLE MENU NAVIGASI HP
+        // =========================================================================
+        (function () {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuIcon = document.getElementById('mobileMenuIcon');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    const isHidden = mobileMenu.classList.toggle('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', String(!isHidden));
+                    if (mobileMenuIcon) {
+                        mobileMenuIcon.classList.toggle('fa-bars', isHidden);
+                        mobileMenuIcon.classList.toggle('fa-xmark', !isHidden);
+                    }
+                });
+            }
+        })();
+
         // =========================================================================
         // EDIT DATA LUAS WILAYAH (HEKTAR) & PENDUDUK DI SINI SESUAI MONOGRAFI DESA
         // =========================================================================

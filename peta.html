@@ -6,8 +6,8 @@
     <title>Peta Interaktif - Pesona Beririjarak</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Playfair Display & Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Montserrat, Playfair Display & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Leaflet CSS -->
@@ -15,22 +15,97 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        body { font-family: 'Poppins', sans-serif; overflow: hidden; margin: 0; padding: 0; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-wi { font-family: 'Montserrat', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-800">
+<body class="bg-gray-900 text-gray-800 flex flex-col h-screen overflow-hidden antialiased">
 
-    <!-- CONTAINER UTAMA FULL SCREEN -->
-    <main class="relative w-screen h-screen overflow-hidden">
+    <!-- NAVBAR HIJAU TUA PEKAT (#022c22) + AKSEN GOLD (SERAGAM DESKTOP & HP) -->
+    <nav id="navbar" class="w-full z-[1100] shrink-0 border-t-[3px] border-t-[#d4af37] bg-[#022c22]/95 backdrop-blur-md border-b border-[#d4af37]/40 shadow-[0_4px_20px_rgba(2,44,34,0.35)] transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-20 flex justify-between items-center gap-2">
+            
+            <!-- POJOK KIRI ATAS: LOGO POTENSI DESA BERIRIJARAK -->
+            <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-[#d4af37] via-[#e2c275] to-[#047857] p-[2px] shadow-md shadow-black/30 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-[#022c22] rounded-[14px] flex items-center justify-center">
+                        <i class="fa-solid fa-feather-pointed text-base sm:text-lg text-[#e2c275]"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col font-wi">
+                    <span class="text-[8px] sm:text-[9px] font-bold tracking-[0.22em] text-[#e2c275] uppercase leading-none">
+                        Kecamatan Wanasaba
+                    </span>
+                    <span class="text-sm sm:text-lg font-extrabold tracking-tight text-white uppercase leading-tight mt-0.5">
+                        Potensi Desa
+                    </span>
+                    <span class="text-[11px] sm:text-sm font-extrabold tracking-widest text-[#d4af37] uppercase leading-none">
+                        Beririjarak
+                    </span>
+                </div>
+            </a>
+
+            <!-- MENU NAVIGASI TENGAH (DESKTOP) -->
+            <div class="hidden md:flex items-center space-x-2 text-[13px] font-semibold text-stone-300">
+                <a href="index.html" class="px-4 py-2 rounded-full hover:text-[#e2c275] hover:bg-[#064e3b]/60 transition-colors">Beranda</a>
+                <a href="index.html#potensi" class="px-4 py-2 rounded-full hover:text-[#e2c275] hover:bg-[#064e3b]/60 transition-colors">Eksplorasi</a>
+                <a href="demografi.html" class="px-4 py-2 rounded-full hover:text-[#e2c275] hover:bg-[#064e3b]/60 transition-colors">Demografi</a>
+                <a href="fasilitas.html" class="px-4 py-2 rounded-full hover:text-[#e2c275] hover:bg-[#064e3b]/60 transition-colors">Fasilitas</a>
+            </div>
+
+            <!-- TOMBOL KANAN & HAMBURGER MENU HP -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <a href="index.html" class="bg-[#064e3b] hover:bg-[#047857] text-white border border-[#d4af37]/60 font-semibold px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full transition-colors duration-300 flex items-center gap-2 text-[11px] sm:text-xs shadow-sm">
+                    <i class="fa-solid fa-house text-[#e2c275]"></i>
+                    <span>Beranda</span>
+                </a>
+
+                <!-- TOMBOL MENU GARIS TIGA (KHUSUS HP) -->
+                <button id="mobileMenuBtn" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false"
+                        class="md:hidden w-10 h-10 rounded-xl bg-[#064e3b]/90 hover:bg-[#047857] border border-[#d4af37]/60 text-[#e2c275] flex items-center justify-center transition-colors shadow-sm">
+                    <i id="mobileMenuIcon" class="fa-solid fa-bars text-base"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- DROPDOWN MENU NAVIGASI KHUSUS HP -->
+        <div id="mobileMenu" class="hidden md:hidden bg-[#022c22] border-t border-[#d4af37]/30 px-4 pt-2.5 pb-4 space-y-1 text-sm font-semibold text-stone-200 shadow-xl">
+            <a href="index.html" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl hover:bg-[#064e3b] hover:text-[#e2c275] transition-colors">
+                <i class="fa-solid fa-house w-4 text-center text-[#e2c275]"></i>
+                <span>Beranda</span>
+            </a>
+            <a href="index.html#potensi" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl hover:bg-[#064e3b] hover:text-[#e2c275] transition-colors">
+                <i class="fa-solid fa-compass w-4 text-center text-[#e2c275]"></i>
+                <span>Eksplorasi</span>
+            </a>
+            <a href="demografi.html" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl hover:bg-[#064e3b] hover:text-[#e2c275] transition-colors">
+                <i class="fa-solid fa-chart-pie w-4 text-center text-[#e2c275]"></i>
+                <span>Demografi</span>
+            </a>
+            <a href="fasilitas.html" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl hover:bg-[#064e3b] hover:text-[#e2c275] transition-colors">
+                <i class="fa-solid fa-building w-4 text-center text-[#e2c275]"></i>
+                <span>Fasilitas</span>
+            </a>
+            <a href="peta.html" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-[#064e3b]/80 text-[#e2c275] border border-[#d4af37]/30 font-bold">
+                <i class="fa-solid fa-map-location-dot w-4 text-center text-[#e2c275]"></i>
+                <span>Peta Interaktif</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- CONTAINER PETA (MENGISI SISA TINGGI LAYAR DI BAWAH NAVBAR) -->
+    <main class="relative flex-1 w-full overflow-hidden">
         
         <!-- PETA LAYAR PENUH -->
         <div id="map" class="w-full h-full z-0"></div>
 
         <!-- FLOATING SEARCH BAR & TOMBOL KEMBALI (Kiri Atas) -->
-        <div class="absolute top-5 left-14 sm:left-16 z-[500] flex items-center gap-2.5 w-[calc(100%-4.5rem)] max-w-md">
+        <div class="absolute top-4 left-14 sm:left-16 z-[500] flex items-center gap-2.5 w-[calc(100%-4.5rem)] max-w-md">
             
             <!-- Tombol Kembali ke Beranda -->
-            <a href="index.html" title="Kembali ke Beranda" class="h-12 w-12 shrink-0 bg-white/95 hover:bg-[#047857] text-gray-700 hover:text-white backdrop-blur-md rounded-2xl shadow-xl border border-white/60 flex items-center justify-center transition-all duration-300">
+            <a href="index.html" title="Kembali ke Beranda" class="h-11 w-11 sm:h-12 sm:w-12 shrink-0 bg-white/95 hover:bg-[#047857] text-gray-700 hover:text-white backdrop-blur-md rounded-2xl shadow-xl border border-white/60 flex items-center justify-center transition-all duration-300">
                 <i class="fa-solid fa-arrow-left text-sm"></i>
             </a>
 
@@ -40,7 +115,7 @@
                     type="text" 
                     id="searchInput" 
                     placeholder="Cari destinasi, masjid, UMKM..." 
-                    class="w-full h-12 pl-11 pr-4 rounded-2xl border border-white/60 bg-white/95 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-[#047857] text-sm text-gray-800 shadow-xl transition" 
+                    class="w-full h-11 sm:h-12 pl-11 pr-4 rounded-2xl border border-white/60 bg-white/95 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-[#047857] text-sm text-gray-800 shadow-xl transition" 
                     autocomplete="off"
                 >
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-[#047857]"></i>
@@ -52,7 +127,7 @@
         </div>
 
         <!-- BADGE LIVE MAP MENGAMBANG (Kanan Atas) -->
-        <div class="hidden sm:flex absolute top-5 right-5 z-[400] bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-full shadow-xl border border-white/60 text-xs font-bold text-[#047857] items-center gap-2">
+        <div class="hidden sm:flex absolute top-4 right-5 z-[400] bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-full shadow-xl border border-white/60 text-xs font-bold text-[#047857] items-center gap-2">
             <span class="relative flex h-2.5 w-2.5">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#047857]"></span>
@@ -66,5 +141,25 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/app.js"></script>
+
+    <!-- Script Menu Navigasi HP -->
+    <script>
+        (function () {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuIcon = document.getElementById('mobileMenuIcon');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    const isHidden = mobileMenu.classList.toggle('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', String(!isHidden));
+                    if (mobileMenuIcon) {
+                        mobileMenuIcon.classList.toggle('fa-bars', isHidden);
+                        mobileMenuIcon.classList.toggle('fa-xmark', !isHidden);
+                    }
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
