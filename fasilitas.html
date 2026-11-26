@@ -163,7 +163,7 @@
     </footer>
 
     <!-- Muat Data Lokasi dari app.js -->
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/app.js?v=2"></script>
 
     <!-- Script Menu Mobile & Render Kartu Lokasi -->
     <script>
@@ -188,57 +188,61 @@
         })();
 
         // =========================================================================
-        // FILTER & RENDER KARTU LOKASI DARI APP.JS
+        // AMBIL & RENDER SELURUH DATA LOKASI TERBARU DARI APP.JS
         // =========================================================================
         let lokasiValidDesa = [];
         let kategoriAktif = "Semua";
 
-        // Fungsi pengecekan titik di dalam poligon batas desa
-        function cekDalamDesa(lat, lng, polygonCoords) {
-            let inside = false;
-            for (let i = 0, j = polygonCoords.length - 1; i < polygonCoords.length; j = i++) {
-                const xi = polygonCoords[i][1], yi = polygonCoords[i][0];
-                const xj = polygonCoords[j][1], yj = polygonCoords[j][0];
-                const intersect = ((yi > lng) !== (yj > lng)) &&
-                    (lat < (xj - xi) * (lng - yi) / (yj - yi) + xi);
-                if (intersect) inside = !inside;
-            }
-            return inside;
-        }
-
-        // Ambil batas desa dan saring data dari desaPotensi (app.js)
-        fetch('data/batas_desa.geojson')
-            .then(res => res.json())
-            .then(geoData => {
-                const koordinatBatas = geoData.features[0].geometry.coordinates[0];
-                if (typeof desaPotensi !== 'undefined') {
-                    lokasiValidDesa = desaPotensi.filter(item => cekDalamDesa(item.lat, item.lng, koordinatBatas));
-                }
+        function muatDataLokasi() {
+            if (typeof desaPotensi !== 'undefined' && Array.isArray(desaPotensi)) {
+                lokasiValidDesa = [...desaPotensi];
                 document.getElementById('countAll').textContent = lokasiValidDesa.length;
                 renderLokasi();
-            })
-            .catch(() => {
-                // Fallback jika GeoJSON gagal dimuat
-                if (typeof desaPotensi !== 'undefined') {
-                    lokasiValidDesa = desaPotensi;
-                    document.getElementById('countAll').textContent = lokasiValidDesa.length;
-                    renderLokasi();
+            } else {
+                document.getElementById('lokasiGrid').innerHTML = `
+                    <div class="col-span-full bg-red-50 rounded-3xl p-8 text-center border border-red-200 text-red-700 text-xs">
+                        <strong>Gagal memuat data dari assets/js/app.js.</strong><br>
+                        Pastikan tidak ada kesalahan tanda baca (seperti kurang koma atau tanda kutip) di file <code>assets/js/app.js</code>.
+                    </div>
+                `;
+            }
+        }
+
+        function ambilUrlFotoValid(item) {
+            if (typeof parseFotoGoogleMaps === 'function') {
+                const hasil = parseFotoGoogleMaps(item.foto);
+                if (hasil) return hasil;
+            }
+            if (item.foto && item.foto.includes('!6s')) {
+                const match = item.foto.match(/!6s([^!]+)/);
+                if (match && match[1]) {
+                    return decodeURIComponent(match[1]);
                 }
-            });
+            }
+            return item.foto || '';
+        }
+
+        function ambilFallbackSatelit(item) {
+            if (typeof getGoogleMapsSatelit === 'function') {
+                return getGoogleMapsSatelit(item.lat, item.lng);
+            }
+            return '';
+        }
 
         function renderLokasi() {
             const grid = document.getElementById('lokasiGrid');
             const keyword = document.getElementById('searchLokasi').value.toLowerCase();
 
             const hasilFilter = lokasiValidDesa.filter(item => {
+                const kat = (item.kategori || '').toLowerCase();
                 const cocokKategori = kategoriAktif === "Semua" || 
-                    item.kategori.toLowerCase().includes(kategoriAktif.toLowerCase()) ||
-                    (kategoriAktif === "Pertanian" && (item.kategori.toLowerCase().includes("wisata") || item.kategori.toLowerCase().includes("pertanian"))) ||
-                    (kategoriAktif === "Fasilitas Umum" && (item.kategori.toLowerCase().includes("fasilitas") || item.kategori.toLowerCase().includes("pendidikan") || item.kategori.toLowerCase().includes("pemerintahan")));
+                    kat.includes(kategoriAktif.toLowerCase()) ||
+                    (kategoriAktif === "Pertanian" && (kat.includes("wisata") || kat.includes("pertanian"))) ||
+                    (kategoriAktif === "Fasilitas Umum" && (kat.includes("fasilitas") || kat.includes("pendidikan") || kat.includes("pemerintahan") || kat.includes("kesehatan")));
 
-                const cocokKata = item.nama.toLowerCase().includes(keyword) || 
-                                  item.deskripsi.toLowerCase().includes(keyword) ||
-                                  item.kategori.toLowerCase().includes(keyword);
+                const cocokKata = (item.nama || '').toLowerCase().includes(keyword) || 
+                                  (item.deskripsi || '').toLowerCase().includes(keyword) ||
+                                  kat.includes(keyword);
 
                 return cocokKategori && cocokKata;
             });
@@ -254,13 +258,21 @@
                 return;
             }
 
-            grid.innerHTML = hasilFilter.map(item => `
+            grid.innerHTML = hasilFilter.map(item => {
+                const urlFoto = ambilUrlFotoValid(item);
+                const urlSatelit = ambilFallbackSatelit(item);
+
+                return `
                 <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
                     <div>
-                        <!-- Penampung Foto dengan Fallback Otomatis -->
+                        <!-- Penampung Foto dengan Ekstraksi Google Maps & Fallback Satelit -->
                         <div class="relative h-44 w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center overflow-hidden">
                             <i class="fa-solid ${item.iconFa || 'fa-location-dot'} text-4xl text-gray-300 absolute"></i>
-                            <img src="${item.foto}" alt="${item.nama}" referrerpolicy="no-referrer" onerror="this.style.display='none'" class="w-full h-full object-cover relative z-10 group-hover:scale-105 transition-transform duration-500">
+                            <img src="${urlFoto}" 
+                                 alt="${item.nama}" 
+                                 referrerpolicy="no-referrer" 
+                                 onerror="if(!this.dataset.fallback && '${urlSatelit}'){this.dataset.fallback='1';this.src='${urlSatelit}';}else{this.style.display='none';}" 
+                                 class="w-full h-full object-cover relative z-10 group-hover:scale-105 transition-transform duration-500">
                             
                             <!-- Badge Kategori -->
                             <span class="absolute top-3 left-3 z-20 bg-white/95 backdrop-blur-md text-[#022c22] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
@@ -282,14 +294,15 @@
                     <!-- Footer Kartu: Koordinat & Aksi -->
                     <div class="px-6 pb-5 pt-3 border-t border-gray-50 flex items-center justify-between gap-2">
                         <span class="text-[10px] text-gray-400 font-mono">
-                            <i class="fa-solid fa-crosshairs text-[#047857] mr-1"></i>${item.lat.toFixed(5)}, ${item.lng.toFixed(5)}
+                            <i class="fa-solid fa-crosshairs text-[#047857] mr-1"></i>${Number(item.lat).toFixed(5)}, ${Number(item.lng).toFixed(5)}
                         </span>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lng}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-[#047857] hover:bg-[#022c22] text-white text-[11px] font-semibold px-3.5 py-1.5 rounded-full transition">
                             <i class="fa-solid fa-route"></i> Rute
                         </a>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // Event Listener Tombol Filter Kategori
@@ -309,6 +322,9 @@
 
         // Event Listener Pencarian
         document.getElementById('searchLokasi').addEventListener('input', renderLokasi);
+
+        // Jalankan saat halaman siap
+        muatDataLokasi();
     </script>
 </body>
 </html>
