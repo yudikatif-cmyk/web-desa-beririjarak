@@ -21,7 +21,6 @@ function parseFotoGoogleMaps(inputUrl) {
     const trimmed = inputUrl.trim();
     if (!trimmed) return "";
 
-    // Otomatis ekstrak link foto jika yang ditempel adalah URL panjang Google Maps (!6shttps...)
     const match = trimmed.match(/!6s(https[^!]+)/);
     if (match && match[1]) {
         const decoded = decodeURIComponent(match[1]);
@@ -31,9 +30,7 @@ function parseFotoGoogleMaps(inputUrl) {
 }
 
 // =========================================================
-// 1. DATA SEBARAN LOKASI
-//    Anda bisa menempelkan langsung URL panjang dari address bar Google Maps
-//    saat foto terbuka, atau link langsung (lh3.googleusercontent.com/...)
+// 1. DATA SEBARAN LOKASI (44 TITIK TERDATA)
 // =========================================================
 const desaPotensi = [
     // --- FASILITAS PEMERINTAHAN & UMUM ---
@@ -43,7 +40,7 @@ const desaPotensi = [
         lat: -8.5231756,
         lng: 116.5336836,
         deskripsi: "Pusat pelayanan administrasi masyarakat Desa Beririjarak.",
-        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLcc_wAd4zPnX-TOrizsqNrfPmlindiK8dHECkP20HnYZFb4Nfz2znl99hKI1cC7IgPvJQK6JcHUrS0QC7j91xNi6M9GzvXjamRRzy7aY3VLAZRvlfvd5xPXPDyU7mEHu7wFrwA=w408-h274-k-no", // <-- Tempel link foto Google Maps Kantor Desa di sini
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLcc_wAd4zPnX-TOrizsqNrfPmlindiK8dHECkP20HnYZFb4Nfz2znl99hKI1cC7IgPvJQK6JcHUrS0QC7j91xNi6M9GzvXjamRRzy7aY3VLAZRvlfvd5xPXPDyU7mEHu7wFrwA=w408-h274-k-no",
         iconFa: "fa-building-columns",
         colorBg: "bg-blue-600",
         colorText: "text-blue-600",
@@ -56,7 +53,7 @@ const desaPotensi = [
         lat: -8.5226113,
         lng: 116.5408511,
         deskripsi: "Pusat perbelanjaan dan pasar tradisional warga Desa Beririjarak.",
-        foto: "", // <-- Tempel link foto Google Maps Pasar Jineng di sini
+        foto: "",
         iconFa: "fa-store",
         colorBg: "bg-orange-500",
         colorText: "text-orange-500",
@@ -105,7 +102,7 @@ const desaPotensi = [
         kategori: "Pendidikan",
         lat: -8.518290644839052,
         lng: 116.54047020987183,
-        deskripsi: "Sekolah Dasar Negeri 3 Beririjarak.",
+        deskripsi: "Sekolah Dasar Negeri 2 Beririjarak.",
         foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLdTOa3sviuw5TVyQ1RR216SIgTfHyE7HwGwQnY0mESZDy4VDVpQYfrypYXtTbluRnmEdDfHjsMZhzH_CGG5pgdq7cpdbr80Q-n4on-ERBYY4ndLsEAlXPD1smr5-_EzZtr92U47=w408-h306-k-no",
         iconFa: "fa-school",
         colorBg: "bg-red-500",
@@ -136,6 +133,30 @@ const desaPotensi = [
         colorText: "text-red-500",
         colorBadge: "bg-red-100"
     },
+    {
+        nama: "Ponpes ASWAJA NW LOTIM",
+        kategori: "Pendidikan",
+        lat: -8.5140514,
+        lng: 116.5317384,
+        deskripsi: "Ponpes di Beririjarak.",
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLcivR0MhTRJReG7d0asUo1BVLDDkCcjz0kXx41MYABypGbAdr55-SfkghDHJ32Rq5gmxO6WB5qPRRljFCsqqPnbisO2K9638TmEyB-W77CtvILjKdfGCVQirbfs3qjLjhl_xXT8Z-Yk0cbP=w408-h306-k-no",
+        iconFa: "fa-school",
+        colorBg: "bg-red-500",
+        colorText: "text-red-500",
+        colorBadge: "bg-red-100"
+    },
+    {
+        nama: "Ponpes Khairul Fatihin NW",
+        kategori: "Pendidikan",
+        lat: -8.5221607,
+        lng: 116.5417078,
+        deskripsi: "Ponpes di Beririjarak.",
+        foto: "https://www.google.com/maps/place/Pondok+Pesantren+Khairul+Fatihin+NW/@-8.5221607,116.5417078,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgIDx1qPKZQ!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgrass-cs%2FAABkmLci9SC1JNNqUmFLyoDHAEm04BiCyYnwfb3qlWJmo5udI9LBc9iXvZZc0shRBTm0iZ60UQQUJzTHj5_YtIlB1XTrSr0Ywuaijcuzissl88WSiCTVpDnrbafUv80whziGRpy67-Y%3Dw152-h86-k-no!7i3840!8i2160!4m18!1m10!4m9!1m4!2m2!1d116.5300043!2d-8.5225225!4e1!1m3!2m2!1d116.5416718!2d-8.5213226!3m6!1s0x2dcc376208e05441:0xf93da6e83b203a32!8m2!3d-8.5221607!4d116.5417078!10e5!16s%2Fg%2F11h64m3fk7?entry=ttu&g_ep=EgoyMDI2MTEyMy4wIKXMDSoASAFQAw%3D%3D#",
+        iconFa: "fa-school",
+        colorBg: "bg-red-500",
+        colorText: "text-red-500",
+        colorBadge: "bg-red-100"
+    },
 
     // --- FASILITAS IBADAH ---
     {
@@ -145,6 +166,18 @@ const desaPotensi = [
         lng: 116.53789117308744,
         deskripsi: "Masjid utama di area Beririjarak.",
         foto: "https://www.google.com/maps/place/Masjid+Syiarul+Islam+Attoyyibi+Beririjarak/@-8.525929,116.5378221,3a,75y,90t/data=!3m8!1e2!3m6!1sCIABIhAGbzzgiSCVIGfapqMADU93!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FANWiy9T-Id4ghHj_AH3AtaRxdMslSPYlfEYNrTtMD5K34gUapUbOZChHHTadqDBbk7pA7UY50FNz8h02mpxTDsqJRqPqWLJ_fAEzub4ZRz79pI624oF4QQMm78aTscAeedLimPrnRA4LftTsueGm%3Dw203-h270-k-no!7i3000!8i4000!4m18!1m10!4m9!1m4!2m2!1d116.5300043!2d-8.5225225!4e1!1m3!2m2!1d116.5378912!2d-8.5257028!3m6!1s0x2dcc3642a5139c65:0x2473b442bc2ef37d!8m2!3d-8.5258888!4d116.5379164!10e5!16s%2Fg%2F11c719_2wp?entry=ttu&g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D#",
+        iconFa: "fa-mosque",
+        colorBg: "bg-yellow-500",
+        colorText: "text-yellow-600",
+        colorBadge: "bg-yellow-100"
+    },
+    {
+        nama: "Masjid Nurul Iman Otak Kebon",
+        kategori: "Tempat Ibadah",
+        lat: -8.5122953,
+        lng: 116.5341881,
+        deskripsi: "Masjid utama di area Beririjarak.",
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLeqLGVT7lIwn2awFBMbw10YuRtGGJf0TMvShh0OLIPxly1tq5CRA1JinMo5_GAKYcua5WqzdgU6EttJm1JA-Ggpl_du2mx8jdLNoh2goRNBtZGoyd7IDQxnylAsAlW-9rWQupwb=w408-h680-k-no",
         iconFa: "fa-mosque",
         colorBg: "bg-yellow-500",
         colorText: "text-yellow-600",
@@ -169,18 +202,6 @@ const desaPotensi = [
         lng: 116.53596143701246,
         deskripsi: "Tempat ibadah masyarakat sekitar.",
         foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLehfu7h0jdttkWK41U8Ya-UanmAJc7VV9SOpzHYjFgxU_oRGZai1Y3col_TrYXUQ_JQrqVKqaYgnPOtLONQgBAK_ycZnwUFyWnAxYHS_lloO9FmFftnz1KD3i5Meqb0qQ61rcNF=w408-h269-k-no",
-        iconFa: "fa-mosque",
-        colorBg: "bg-yellow-500",
-        colorText: "text-yellow-600",
-        colorBadge: "bg-yellow-100"
-    },
-    {
-        nama: "Masjid Ihsan Paok Dangka",
-        kategori: "Tempat Ibadah",
-        lat: -8.53056,
-        lng: 116.54821,
-        deskripsi: "Tempat ibadah masyarakat Paok Dangka.",
-        foto: "",
         iconFa: "fa-mosque",
         colorBg: "bg-yellow-500",
         colorText: "text-yellow-600",
@@ -278,7 +299,7 @@ const desaPotensi = [
         lat: -8.525153265766614,
         lng: 116.53720909801065,
         deskripsi: "Penyedia bibit serta coklat.",
-        foto: "https://maps.gstatic.com/tactile/pane/default_geocode-1x.png",
+        foto: "",
         iconFa: "fa-leaf",
         colorBg: "bg-purple-500",
         colorText: "text-purple-700",
@@ -393,18 +414,6 @@ const desaPotensi = [
         colorBadge: "bg-emerald-100"
     },
     {
-        nama: "oke jamur lombok",
-        kategori: "Ekonomi & UMKM",
-        lat: -8.513366424155585,
-        lng: 116.53629065081824,
-        deskripsi: "Usaha jamur lokal.",
-        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLci4XoB_g3rIJr2x_npGQWl3_aYFE3KCs-A40krkFrdoh3ek7gos-AwFlByHLBCT-xKiBvEafb-ToZ4soiJuMusPa1dNgaCJJrraJVBAUmjvZqgkG_sA7f7ZQQWHIaDOrCaJEQ=w428-h240-k-no",
-        iconFa: "fa-store",
-        colorBg: "bg-emerald-600",
-        colorText: "text-emerald-700",
-        colorBadge: "bg-emerald-100"
-    },
-    {
         nama: "sapu lidi oke",
         kategori: "Ekonomi & UMKM",
         lat: -8.512495510081926,
@@ -451,8 +460,208 @@ const desaPotensi = [
         colorBg: "bg-emerald-600",
         colorText: "text-emerald-700",
         colorBadge: "bg-emerald-100"
-    }
+    },
+    {
+        nama: "bengkel tiara",
+        kategori: "Ekonomi & UMKM",
+        lat: -8.512800816450316,
+        lng: 116.5348364808584,
+        deskripsi: "Usaha dagang lokal warga.",
+        foto: "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=sNA5_sEdvpyaPQn-fMfpsQ&cb_client=search.gws-prod.grass&w=408&h=240&yaw=244.65369&pitch=0&thumbfov=100",
+        iconFa: "fa-wrench",
+        colorBg: "bg-emerald-600",
+        colorText: "text-emerald-700",
+        colorBadge: "bg-emerald-100"
+    },
+    {
+        nama: "bengkel",
+        kategori: "Ekonomi & UMKM",
+        lat: -8.5120326981145,
+        lng: 116.5342195822751,
+        deskripsi: "UMKM Otomotif.",
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLdgp3w_zr0XADdK9k9qGoX83FkFqP1RwyUsQzk9zMjdlVG-6uDy9ddrDajV8VhAe-ujs1RElQ8qmLfe_BJyohwH17KlUG9JF1YZQO1YlgK4gnihgdx4QNJH6LO1AihS8EOVWvA=w408-h544-k-no",
+        iconFa: "fa-wrench",
+        colorBg: "bg-emerald-600",
+        colorText: "text-emerald-700",
+        colorBadge: "bg-emerald-100"
+    },
+    {
+        nama: "bengkel",
+        kategori: "Ekonomi & UMKM",
+        lat: -8.511921026106494,
+        lng: 116.53435682067642,
+        deskripsi: "UMKM Otomotif.",
+        foto: "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Pu5xaPg1LAVeeGphtr1Pfg&cb_client=search.gws-prod.grass&w=408&h=240&yaw=228.58185&pitch=0&thumbfov=100",
+        iconFa: "fa-wrench",
+        colorBg: "bg-emerald-600",
+        colorText: "text-emerald-700",
+        colorBadge: "bg-emerald-100"
+    },
+    {
+        nama: "Tempat pupuk organik",
+        kategori: "Pertanian",
+        lat: -8.511082733062356,
+        lng: 116.53496200578806,
+        deskripsi: "Usaha dagang lokal warga.",
+        foto: "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=94vo0rW1c8RcJZHSkXdfxg&cb_client=search.gws-prod.grass&w=408&h=240&yaw=171.45648&pitch=0&thumbfov=100",
+        iconFa: "fa-seedling",
+        colorBg: "bg-purple-500",
+        colorText: "text-purple-700",
+        colorBadge: "bg-purple-100"
+    },
+    {
+        nama: "Kelompok Tani Ternak Sapi Montong Mentangi",
+        kategori: "Pertanian",
+        lat: -8.517384958168067,
+        lng: 116.5319207362032,
+        deskripsi: "Usaha pertanian dan peternakan lokal warga.",
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLdYfvaCiV2fF9cdcHa-QlkoqteUdAUBBgr9YS1J3Z8xe4b9TBk7uRG9EFXbD9VLzFZS8mzTVr5uT1c3C4qS1l78wbGL36DcAI4NcYoDGkfX8FyWYu5C1-U83LEsQ0mYxyMvzJs-=w408-h272-k-no",
+        iconFa: "fa-leaf",
+        colorBg: "bg-purple-500",
+        colorText: "text-purple-700",
+        colorBadge: "bg-purple-100"
+    },
+    {
+        nama: "Kelompok ternak Berkah Desa Beririjarak",
+        kategori: "Pertanian",
+        lat: -8.521318698736351,
+        lng: 116.53080303143798,
+        deskripsi: "Usaha pertanian dan peternakan lokal warga.",
+        foto: "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Pq2Pp8gmAx7IvU703f4b2Q&cb_client=search.gws-prod.grass&w=408&h=240&yaw=238.70074&pitch=0&thumbfov=100",
+        iconFa: "fa-leaf",
+        colorBg: "bg-purple-500",
+        colorText: "text-purple-700",
+        colorBadge: "bg-purple-100"
+    },
+    {
+        nama: "Hulti Rias",
+        kategori: "Ekonomi & UMKM",
+        lat: -8.5173273,
+        lng: 116.5307862,
+        deskripsi: "Usaha pertanian dan peternakan lokal warga.",
+        foto: "https://www.google.com/maps/place/Hulti+Rias/@-8.517369,116.5308155,3a,75y,90t/data=!3m8!1e2!3m6!1sCIABIhADs9Ubre6JW1sg6eAcTPOW!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FANWiy9T0WiiNMDC4DkZvrJM1kbVoReArqlR7YrLvhf_Cqh6OmvreO1rjmFlhiy2eXEMs-Rmt57hodn1I8wOOYH3qqwP9NTL54jSo-4cgc3sXMz9y3gXJ3DkPqrTK94G34Mzr1JzyFee9LrO8j32w%3Dw203-h342-k-no!7i1536!8i2594!4m18!1m10!4m9!1m4!2m2!1d116.5300043!2d-8.5225225!4e1!1m3!2m2!1d116.5306634!2d-8.5162392!3m6!1s0x2dcc37003fe38eb3:0x73e519425f7f33bd!8m2!3d-8.5173273!4d116.5307862!10e5!16s%2Fg%2F11zcrkjlhp?entry=ttu&g_ep=EgoyMDI2MTEyMy4wIKXMDSoASAFQAw%3D%3D#",
+        iconFa: "fa-store",
+        colorBg: "bg-emerald-500",
+        colorText: "text-emerald-700",
+        colorBadge: "bg-emerald-100"
+    },
+    {
+        nama: "Oke Jamur Lombok",
+        kategori: "Pertanian",
+        lat: -8.5134091,
+        lng: 116.5362968,
+        deskripsi: "Usaha pertanian dan peternakan lokal warga.",
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLeECpuTCMFANCyZEG6-OjmN-VoSR4tUOP5tVQhx-Xe7Qas_p549hnPUuDH9FEYD08_DaRuASAsA3X5XoShTcpXI0UPN6sfjTVj_YduyDCiOiZjzF-LLkwgHZ3r0Jsb3IO3P11Q=w428-h240-k-no",
+        iconFa: "fa-leaf",
+        colorBg: "bg-purple-500",
+        colorText: "text-purple-700",
+        colorBadge: "bg-purple-100"
+    },
+
+    // --- POTENSI WISATA (Hapus tanda /* dan */ di bawah lalu isi nama & koordinat wisata) ---
+
+    {
+        nama: "CAMPING GROUND EKOWISATA GAWAR GONG",
+        kategori: "Wisata",
+        lat: -8.506427866388107,
+        lng: 116.53413907639701,
+        deskripsi: "Wisata alam di Desa Beririjarak.",
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLdCDG525HB8RislS42rSsdFKAxCPTGqrhzGEESF_h3o5Xjd48rcJYgTGoC-UTG4j3NVqHG8dv9QYie_w5uH9fBumUAfXdKB7_MbVkIo97rOm74khVRCwQ1ZEFqmtnXVUD_u5Kk4=w426-h240-k-no",
+        iconFa: "fa-mountain-sun",
+        colorBg: "bg-teal-600",
+        colorText: "text-teal-700",
+        colorBadge: "bg-teal-100"
+    },
+    {
+        nama: "Aik numpas",
+        kategori: "Wisata",
+        lat: -8.505844271345419,
+        lng: 116.53485790837715,
+        deskripsi: "Wisata alam di Desa Beririjarak.",
+        foto: "",
+        iconFa: "fa-mountain-sun",
+        colorBg: "bg-teal-600",
+        colorText: "text-teal-700",
+        colorBadge: "bg-teal-100"
+    },
+    {
+        nama: "Gawar Gong ",
+        kategori: "Wisata",
+        lat: -8.506077709469173,
+        lng: 116.53373138064705,
+        deskripsi: "Wisata alam di Desa Beririjarak.",
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLcpEleXTHNGlkffIHgOE-Kzo1xZ7ZDU8NRpPkrQxgZZYr3e_iI8-UTe6_hx5sJ8F7NksBMJCWPNB5jTqbW9A-zwnewer72gKTU550L9aJW96o25UEco9bI4ai_wAz7_V4IMiqy-Wg=w408-h725-k-no",
+        iconFa: "fa-mountain-sun",
+        colorBg: "bg-teal-600",
+        colorText: "text-teal-700",
+        colorBadge: "bg-teal-100"
+    },
+    {
+        nama: "HUTAN LINDUNG GAWAR GONG",
+        kategori: "Wisata",
+        lat: -8.503386628842145,
+        lng: 116.53329360595737,
+        deskripsi: "Wisata alam di Desa Beririjarak.",
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLcYI8sbXsFPTmtuo0ZlZJ7GutDjOG8vK8yz2LwDjUISOBRYcFHfGXhiTj3ar8RgpTVfJB56RWh_gC3QNpdXSYG_KqllTOUcomfD5_s0QafetJmo-eh9l1lbVatPkYT8LtqiEmPoaw=w408-h306-k-no",
+        iconFa: "fa-mountain-sun",
+        colorBg: "bg-teal-600",
+        colorText: "text-teal-700",
+        colorBadge: "bg-teal-100"
+    },
+    {
+        nama: "Orong Landang Gamang",
+        kategori: "Wisata",
+        lat: -8.502229771321495, 
+        lng: 116.52833182977727,
+        deskripsi: "Wisata alam di Desa Beririjarak.",
+        foto: "https://lh3.googleusercontent.com/grass-cs/AABkmLfb3q2A7siC1VQcuyk7W8OnQManN-zhQtxG7_MaBu5oh__oJNxWFGxP2o_8oxefqJcXoCzmb_7-ZoGlZBHTO6B2-11Mc2qQgyhJ3GoF7UqtUdchnjO-dW2iSo5PqQwXKuUM-d5o=w408-h244-k-no",
+        iconFa: "fa-mountain-sun",
+        colorBg: "bg-teal-600",
+        colorText: "text-teal-700",
+        colorBadge: "bg-teal-100"
+    },
+
+
 ];
+
+// =========================================================
+// SINKRONISASI OTOMATIS LOKASI TAMBAHAN DARI LOCALSTORAGE WEB
+// =========================================================
+(function sinkronLokasiBrowser() {
+    const kunciPenyimpanan = ["desaPotensiCustom", "lokasiTambahan", "lokasiBaruDesa"];
+    kunciPenyimpanan.forEach(kunci => {
+        try {
+            const raw = localStorage.getItem(kunci);
+            if (!raw) return;
+            const parsed = JSON.parse(raw);
+            if (!Array.isArray(parsed)) return;
+
+            parsed.forEach(baru => {
+                if (!baru || !baru.nama || typeof baru.lat !== "number" || typeof baru.lng !== "number") return;
+                const sudahAda = desaPotensi.some(
+                    lama => lama.nama.toLowerCase() === baru.nama.toLowerCase() &&
+                            Math.abs(lama.lat - baru.lat) < 0.00005 &&
+                            Math.abs(lama.lng - baru.lng) < 0.00005
+                );
+                if (!sudahAda) {
+                    const isWisata = (baru.kategori || "").toLowerCase().includes("wisata");
+                    desaPotensi.push({
+                        nama: baru.nama,
+                        kategori: baru.kategori || "Ekonomi & UMKM",
+                        lat: baru.lat,
+                        lng: baru.lng,
+                        deskripsi: baru.deskripsi || "Lokasi terdata di Desa Beririjarak.",
+                        foto: baru.foto || "",
+                        iconFa: baru.iconFa || (isWisata ? "fa-mountain-sun" : "fa-location-dot"),
+                        colorBg: baru.colorBg || (isWisata ? "bg-teal-600" : "bg-emerald-600"),
+                        colorText: baru.colorText || (isWisata ? "text-teal-700" : "text-emerald-700"),
+                        colorBadge: baru.colorBadge || (isWisata ? "bg-teal-100" : "bg-emerald-100")
+                    });
+                }
+            });
+        } catch (e) {}
+    });
+})();
 
 // Normalisasi otomatis agar peta.html & fasilitas.html selalu mendapat URL foto yang valid
 desaPotensi.forEach(item => {
@@ -509,23 +718,10 @@ if (document.getElementById('map')) {
     `;
     document.head.appendChild(mapCustomStyle);
 
-    // Inisialisasi Peta
+    // Inisialisasi Peta Penuh tanpa batas administrasi desa maupun dusun
     const map = L.map('map', {
         zoomControl: false
-    }).setView([-8.5335, 116.5375], 15);
-
-    // Pane khusus agar urutan lapisan masking putih, batas desa, batas dusun, label, dan marker konsisten
-    map.createPane('whiteMaskPane');
-    map.getPane('whiteMaskPane').style.zIndex = 350;
-
-    map.createPane('batasDesaGlowPane');
-    map.getPane('batasDesaGlowPane').style.zIndex = 405;
-
-    map.createPane('batasDesaPane');
-    map.getPane('batasDesaPane').style.zIndex = 410;
-
-    map.createPane('batasDusunPane');
-    map.getPane('batasDusunPane').style.zIndex = 420;
+    }).setView([-8.5180, 116.5360], 14);
 
     // Pindahkan Zoom Control ke pojok kanan bawah
     L.control.zoom({
@@ -555,123 +751,6 @@ if (document.getElementById('map')) {
     let currentBasemapKey = 'satelit';
     basemapLayers[currentBasemapKey].addTo(map);
 
-    // Poligon batas luar Desa Beririjarak [lat, lng] selaras dengan data/batas_desa.geojson
-    const batasDesaCustom = [
-        [-8.5226, 116.5314],
-        [-8.5212, 116.5346],
-        [-8.5218, 116.5396],
-        [-8.5242, 116.5424],
-        [-8.5282, 116.5424],
-        [-8.5325, 116.5432],
-        [-8.5356, 116.5436],
-        [-8.5375, 116.5434],
-        [-8.5416, 116.5428],
-        [-8.5450, 116.5436],
-        [-8.5458, 116.5404],
-        [-8.5422, 116.5392],
-        [-8.5390, 116.5382],
-        [-8.5382, 116.5332],
-        [-8.5378, 116.5310],
-        [-8.5324, 116.5298],
-        [-8.5290, 116.5296],
-        [-8.5255, 116.5304]
-    ];
-
-    // Fungsi Helper: Mengekstrak seluruh ring [lat, lng] dari GeoJSON
-    function extractLatLngRingsFromGeoJson(geojson) {
-        const rings = [];
-
-        function walkGeometry(geom) {
-            if (!geom) return;
-            if (geom.type === 'Polygon' && Array.isArray(geom.coordinates)) {
-                geom.coordinates.forEach(ring => {
-                    rings.push(ring.map(c => [c[1], c[0]]));
-                });
-            } else if (geom.type === 'MultiPolygon' && Array.isArray(geom.coordinates)) {
-                geom.coordinates.forEach(poly => {
-                    poly.forEach(ring => {
-                        rings.push(ring.map(c => [c[1], c[0]]));
-                    });
-                });
-            } else if (geom.type === 'GeometryCollection' && Array.isArray(geom.geometries)) {
-                geom.geometries.forEach(walkGeometry);
-            }
-        }
-
-        if (!geojson) return rings;
-        if (geojson.type === 'FeatureCollection' && Array.isArray(geojson.features)) {
-            geojson.features.forEach(f => walkGeometry(f.geometry));
-        } else if (geojson.type === 'Feature') {
-            walkGeometry(geojson.geometry);
-        } else {
-            walkGeometry(geojson);
-        }
-
-        return rings;
-    }
-
-    let whiteOutsideMaskLayer = null;
-    let batasDesaGlowLayer = null;
-    let batasDesaOutlineLayer = null;
-
-    function getMaskStyleForBasemap(basemapKey) {
-        if (basemapKey === 'bersih' || basemapKey === 'topografi') {
-            return { fillColor: '#e2e8f0', fillOpacity: 0.72 };
-        }
-        return { fillColor: '#f8fafc', fillOpacity: 0.76 };
-    }
-
-    function applyWhiteOutsideMask(innerRings) {
-        if (whiteOutsideMaskLayer) {
-            map.removeLayer(whiteOutsideMaskLayer);
-        }
-
-        const outerWorld = [
-            [-90, -180],
-            [-90, 180],
-            [90, 180],
-            [90, -180]
-        ];
-
-        const maskStyle = getMaskStyleForBasemap(currentBasemapKey);
-
-        whiteOutsideMaskLayer = L.polygon([outerWorld, ...innerRings], {
-            pane: 'whiteMaskPane',
-            stroke: false,
-            fillColor: maskStyle.fillColor,
-            fillOpacity: maskStyle.fillOpacity,
-            fillRule: 'evenodd',
-            interactive: false
-        }).addTo(map);
-    }
-
-    function renderDesaOutline(rings) {
-        if (batasDesaGlowLayer) {
-            map.removeLayer(batasDesaGlowLayer);
-        }
-        if (batasDesaOutlineLayer) {
-            map.removeLayer(batasDesaOutlineLayer);
-        }
-
-        batasDesaGlowLayer = L.polygon(rings, {
-            pane: 'batasDesaGlowPane',
-            color: '#fb7185',
-            weight: 8,
-            opacity: 0.35,
-            fill: false,
-            interactive: false
-        }).addTo(map);
-
-        batasDesaOutlineLayer = L.polygon(rings, {
-            pane: 'batasDesaPane',
-            color: '#e11d48',
-            weight: 3.5,
-            dashArray: '8, 6',
-            fill: false,
-            interactive: false
-        }).addTo(map);
-    }
-
     // Filter URL (jika dibuka dengan ?filter=fasilitas atau ?filter=potensi)
     const urlParams = new URLSearchParams(window.location.search);
     const activeFilter = urlParams.get('filter');
@@ -680,7 +759,7 @@ if (document.getElementById('map')) {
     if (activeFilter === 'fasilitas') {
         displayedDesaPotensi = desaPotensi.filter(item => ["Fasilitas Publik", "Pendidikan", "Tempat Ibadah"].includes(item.kategori));
     } else if (activeFilter === 'potensi') {
-        displayedDesaPotensi = desaPotensi.filter(item => ["Pertanian", "Ekonomi & UMKM"].includes(item.kategori));
+        displayedDesaPotensi = desaPotensi.filter(item => ["Pertanian", "Ekonomi & UMKM", "Wisata"].includes(item.kategori));
     }
 
     // Tampilkan semua lokasi tersimpan
@@ -742,24 +821,6 @@ if (document.getElementById('map')) {
         item.marker = marker; 
     });
 
-    // Terapkan poligon batasDesaCustom sebagai dasar, lalu sinkronkan dengan data/batas_desa.geojson
-    applyWhiteOutsideMask([batasDesaCustom]);
-    renderDesaOutline([batasDesaCustom]);
-
-    fetch('data/batas_desa.geojson')
-        .then(res => {
-            if (!res.ok) throw new Error('GeoJSON not found');
-            return res.json();
-        })
-        .then(data => {
-            const rings = extractLatLngRingsFromGeoJson(data);
-            if (rings.length > 0) {
-                applyWhiteOutsideMask(rings);
-                renderDesaOutline(rings);
-            }
-        })
-        .catch(() => {});
-
     // Fitur Pencarian (Search Bar Logic)
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
@@ -818,87 +879,6 @@ if (document.getElementById('map')) {
         });
     }
 
-    // Garis Pembagi 9 Dusun
-    const garisBatasDusun = [
-        [[-8.5220, 116.5326], [-8.5288, 116.5348], [-8.5325, 116.5368]],
-        [[-8.5213, 116.5346], [-8.5295, 116.5372], [-8.5318, 116.5384]],
-        [[-8.5216, 116.5374], [-8.5292, 116.5392]],
-        [[-8.5292, 116.5392], [-8.5282, 116.5424]],
-        [[-8.5295, 116.5372], [-8.5318, 116.5408], [-8.5325, 116.5432]],
-        [[-8.5292, 116.5392], [-8.5348, 116.5416], [-8.5356, 116.5436]],
-        [[-8.5324, 116.5298], [-8.5325, 116.5368]],
-        [[-8.5325, 116.5368], [-8.5368, 116.5392], [-8.5396, 116.5404]],
-        [[-8.5325, 116.5368], [-8.5362, 116.5415], [-8.5375, 116.5434]],
-        [[-8.5396, 116.5404], [-8.5416, 116.5428]]
-    ];
-
-    garisBatasDusun.forEach(garis => {
-        L.polyline(garis, {
-            pane: 'batasDusunPane',
-            color: '#fda4af',
-            weight: 2,
-            dashArray: '5, 5',
-            opacity: 0.95,
-            interactive: false
-        }).addTo(map);
-    });
-
-    // Label Nama 9 Dusun & Desa Tetangga
-    const daftarLabelWilayah = [
-        { nama: "DS. SENGANTON", lat: -8.5295, lng: 116.5318, tipe: "dusun" },
-        { nama: "DS. OTAK KEBON BARAT", lat: -8.5270, lng: 116.5344, tipe: "dusun" },
-        { nama: "DS. OTAK KEBON", lat: -8.5224, lng: 116.5363, tipe: "dusun" },
-        { nama: "DS. OTAK KEBON TIMUR", lat: -8.5248, lng: 116.5406, tipe: "dusun" },
-        { nama: "DS. AMBENGAN TIMUR", lat: -8.5314, lng: 116.5398, tipe: "dusun" },
-        { nama: "DS. AMBENGAN", lat: -8.5338, lng: 116.5394, tipe: "dusun" },
-        { nama: "DS. BERIRIJARAK TIMUR", lat: -8.5356, lng: 116.5405, tipe: "dusun" },
-        { nama: "DS. BERIRIJARAK UTARA", lat: -8.5363, lng: 116.5338, tipe: "dusun" },
-        { nama: "DS. BERIRIJARAK SELATAN", lat: -8.5438, lng: 116.5418, tipe: "dusun" },
-
-        { nama: "TAMAN NASIONAL GUNUNG RENJANI", lat: -8.5185, lng: 116.5365, tipe: "tetangga" },
-        { nama: "DESA KEMBANG KERANG", lat: -8.5315, lng: 116.5245, tipe: "tetangga" },
-        { nama: "DESA KARANG BARU UTARA", lat: -8.5425, lng: 116.5335, tipe: "tetangga" },
-        { nama: "DESA JENENG", lat: -8.5410, lng: 116.5472, tipe: "tetangga" },
-        { nama: "DESA BEBIDAS", lat: -8.5312, lng: 116.5478, tipe: "tetangga" }
-    ];
-
-    daftarLabelWilayah.forEach(wil => {
-        const classCss = wil.tipe === "dusun" ? "label-dusun" : "label-tetangga";
-        L.marker([wil.lat, wil.lng], {
-            icon: L.divIcon({
-                className: '',
-                html: `<span class="${classCss}">${wil.nama}</span>`,
-                iconSize: [140, 22],
-                iconAnchor: [70, 11]
-            }),
-            interactive: false,
-            zIndexOffset: 1000
-        }).addTo(map);
-    });
-
-    // Legenda Peta Desa (Pojok Kiri Bawah)
-    const legendaPeta = L.control({ position: 'bottomleft' });
-    legendaPeta.onAdd = function () {
-        const div = L.DomUtil.create('div', 'bg-white/95 backdrop-blur-md px-3.5 py-3 rounded-2xl shadow-lg border border-stone-200 text-[11px] text-stone-700 space-y-1.5 mb-2 ml-2');
-        div.innerHTML = `
-            <div class="font-bold text-[#022c22] uppercase tracking-wider text-[10px] border-b border-stone-200 pb-1">Legenda Peta Desa</div>
-            <div class="flex items-center gap-2">
-                <span class="w-4 h-0 border-t-[3px] border-dashed border-[#e11d48] inline-block"></span>
-                <span>Batas Desa</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="w-4 h-0 border-t-2 border-dashed border-[#fda4af] inline-block"></span>
-                <span>Batas Dusun</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="w-3.5 h-3.5 rounded-sm bg-[#f8fafc] border border-stone-400 inline-block"></span>
-                <span>Bagian Putih di Luar Desa</span>
-            </div>
-        `;
-        return div;
-    };
-    legendaPeta.addTo(map);
-
     // Panel Kontrol Kanan Atas: Penunjuk Arah Utara + Pengalih Tampilan Peta
     const topRightControl = L.control({ position: 'topright' });
     topRightControl.onAdd = function () {
@@ -935,10 +915,6 @@ if (document.getElementById('map')) {
                 map.removeLayer(basemapLayers[currentBasemapKey]);
                 basemapLayers[selectedKey].addTo(map);
                 currentBasemapKey = selectedKey;
-
-                if (whiteOutsideMaskLayer) {
-                    whiteOutsideMaskLayer.setStyle(getMaskStyleForBasemap(selectedKey));
-                }
 
                 buttons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');

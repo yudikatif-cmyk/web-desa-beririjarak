@@ -162,8 +162,8 @@
         </div>
     </footer>
 
-    <!-- Muat Data Lokasi dari app.js -->
-    <script src="assets/js/app.js?v=2"></script>
+    <!-- Muat Data Lokasi Terbaru dari app.js (versi diperbarui agar tidak membaca cache lama) -->
+    <script src="assets/js/app.js?v=4"></script>
 
     <!-- Script Menu Mobile & Render Kartu Lokasi -->
     <script>
@@ -188,14 +188,55 @@
         })();
 
         // =========================================================================
-        // AMBIL & RENDER SELURUH DATA LOKASI TERBARU DARI APP.JS
+        // AMBIL & RENDER SELURUH DATA LOKASI TERBARU (APP.JS + PENYIMPANAN BROWSER)
         // =========================================================================
         let lokasiValidDesa = [];
         let kategoriAktif = "Semua";
 
+        function gabungLokasiDariBrowser(daftarUtama) {
+            const hasil = [...daftarUtama];
+            try {
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (!key) continue;
+                    const raw = localStorage.getItem(key);
+                    if (!raw || (!raw.trim().startsWith('[') && !raw.trim().startsWith('{'))) continue;
+
+                    const parsed = JSON.parse(raw);
+                    const kandidatList = Array.isArray(parsed) ? parsed : [parsed];
+
+                    kandidatList.forEach(baru => {
+                        if (!baru || !baru.nama) return;
+                        const latNum = Number(baru.lat);
+                        const lngNum = Number(baru.lng);
+                        if (Number.isNaN(latNum) || Number.isNaN(lngNum)) return;
+
+                        const sudahAda = hasil.some(
+                            lama => lama.nama.toLowerCase().trim() === String(baru.nama).toLowerCase().trim() &&
+                                    Math.abs(Number(lama.lat) - latNum) < 0.00005 &&
+                                    Math.abs(Number(lama.lng) - lngNum) < 0.00005
+                        );
+
+                        if (!sudahAda) {
+                            hasil.push({
+                                nama: String(baru.nama).trim(),
+                                kategori: baru.kategori || "Ekonomi & UMKM",
+                                lat: latNum,
+                                lng: lngNum,
+                                deskripsi: baru.deskripsi || "Lokasi terdata di Desa Beririjarak.",
+                                foto: baru.foto || "",
+                                iconFa: baru.iconFa || "fa-location-dot"
+                            });
+                        }
+                    });
+                }
+            } catch (e) {}
+            return hasil;
+        }
+
         function muatDataLokasi() {
             if (typeof desaPotensi !== 'undefined' && Array.isArray(desaPotensi)) {
-                lokasiValidDesa = [...desaPotensi];
+                lokasiValidDesa = gabungLokasiDariBrowser(desaPotensi);
                 document.getElementById('countAll').textContent = lokasiValidDesa.length;
                 renderLokasi();
             } else {
@@ -237,7 +278,7 @@
                 const kat = (item.kategori || '').toLowerCase();
                 const cocokKategori = kategoriAktif === "Semua" || 
                     kat.includes(kategoriAktif.toLowerCase()) ||
-                    (kategoriAktif === "Pertanian" && (kat.includes("wisata") || kat.includes("pertanian"))) ||
+                    (kategoriAktif === "Pertanian" && (kat.includes("wisata") || kat.includes("pertanian") || kat.includes("peternakan"))) ||
                     (kategoriAktif === "Fasilitas Umum" && (kat.includes("fasilitas") || kat.includes("pendidikan") || kat.includes("pemerintahan") || kat.includes("kesehatan")));
 
                 const cocokKata = (item.nama || '').toLowerCase().includes(keyword) || 
@@ -268,7 +309,7 @@
                         <!-- Penampung Foto dengan Ekstraksi Google Maps & Fallback Satelit -->
                         <div class="relative h-44 w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center overflow-hidden">
                             <i class="fa-solid ${item.iconFa || 'fa-location-dot'} text-4xl text-gray-300 absolute"></i>
-                            <img src="${urlFoto}" 
+                            <img src="${urlFoto || urlSatelit}" 
                                  alt="${item.nama}" 
                                  referrerpolicy="no-referrer" 
                                  onerror="if(!this.dataset.fallback && '${urlSatelit}'){this.dataset.fallback='1';this.src='${urlSatelit}';}else{this.style.display='none';}" 
@@ -322,6 +363,9 @@
 
         // Event Listener Pencarian
         document.getElementById('searchLokasi').addEventListener('input', renderLokasi);
+
+        // Sinkronisasi otomatis jika ada lokasi baru ditambahkan dari tab lain
+        window.addEventListener('storage', muatDataLokasi);
 
         // Jalankan saat halaman siap
         muatDataLokasi();
